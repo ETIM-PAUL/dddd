@@ -1,11 +1,15 @@
 import React from "react";
 import Footer from "../components/Footer/Footer";
+import Header from "../components/HeaderNav/Header";
 import SideBar from "../components/SideBar/SideBar";
 
 const SpotifyPlayer = () => {
   return (
     <div>
-      <SideBar />
+      <div className="flex">
+        <SideBar />
+        <Header />
+      </div>
       <Footer />
     </div>
   );
