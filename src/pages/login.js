@@ -1,4 +1,5 @@
 import React from "react";
+import { spotifyLoginUrl } from "../adapters/spotify-config";
 
 const SpotifyLogin = () => {
   return (
@@ -10,9 +11,11 @@ const SpotifyLogin = () => {
           className="w-auto h-[200px] md:h-[250px] "
         />
         <div className="flex justify-center">
-          <button className="uppercase text-[#fff] bg-[#32b954] py-2 px-3 rounded-[20px] text-[12px] mt-[12rem]">
-            Login with Spotify
-          </button>
+          <a href={spotifyLoginUrl}>
+            <button className="uppercase text-[#fff] bg-[#32b954] py-2 px-3 rounded-[20px] text-[12px] mt-[12rem] hover:bg-[#078627]">
+              Login with Spotify
+            </button>
+          </a>
         </div>
       </div>
     </div>
