@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useSpotify } from "./context/SpotifyContext";
 
 import SpotifyLogin from "./pages/login";
 import SpotifyPlayer from "./pages/main";
 import { getTokenFromUrl } from "./utils/utilFunctions";
 
 function App() {
-  const [spotifyLoginToken, setSpotifyLoginToken] = useState("");
+  const { state, dispatch } = useSpotify();
 
   useEffect(() => {
     const hashed = getTokenFromUrl();
@@ -13,11 +14,11 @@ function App() {
     const loginToken = hashed.access_token;
 
     if (loginToken) {
-      setSpotifyLoginToken(loginToken);
+      dispatch({ type: "setSpotifyToken", payload: loginToken });
     }
-  }, []);
+  }, [dispatch]);
 
-  return <div>{!spotifyLoginToken ? <SpotifyPlayer /> : <SpotifyLogin />}</div>;
+  return <div>{state.token ? <SpotifyPlayer /> : <SpotifyLogin />}</div>;
 }
 
 export default App;
