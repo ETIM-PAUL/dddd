@@ -17,7 +17,7 @@ function App() {
     }
   }, []);
 
-  return <div>{spotifyLoginToken ? <SpotifyPlayer /> : <SpotifyLogin />}</div>;
+  return <div>{!spotifyLoginToken ? <SpotifyPlayer /> : <SpotifyLogin />}</div>;
 }
 
 export default App;
