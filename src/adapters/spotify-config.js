@@ -4,10 +4,15 @@ const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 
 const scopes = [
   "user-read-currently-playing",
-  "user-read-recently-played",
   "user-read-playback-state",
-  "user-top-read",
   "user-modify-playback-state",
+  "user-read-recently-played",
+  "user-read-playback-position",
+  "user-top-read",
+  "user-read-email",
+  "user-read-private",
+  "user-library-modify",
+  "user-library-read",
 ];
 
 export const spotifyLoginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
