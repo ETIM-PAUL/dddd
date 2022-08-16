@@ -1,7 +1,6 @@
 export function spotifyReducer(state, { type, payload }) {
   switch (type) {
     case "setSpotifyToken": {
-      console.log("all");
       return {
         ...state,
         token: payload,

@@ -5,6 +5,7 @@ import { VscLibrary } from "react-icons/vsc";
 import { BsPlusSquare } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { BsHeart } from "react-icons/bs";
+import Playlists from "./Playlist";
 
 const SideBar = () => {
   return (
@@ -19,11 +20,12 @@ const SideBar = () => {
           <SideBarComponent icon={<MdHomeFilled />} title="Home" />
           <SideBarComponent icon={<FiSearch />} title="Search" />
           <SideBarComponent icon={<VscLibrary />} title="Your Library" />
-          <br />
+          <div className="my-4" />
           <SideBarComponent icon={<BsPlusSquare />} title="Create Playlist" />
           <SideBarComponent icon={<BsHeart />} title="Liked Songs" />
         </div>
         <hr className="mt-2 bg-[#000]" />
+        <Playlists />
       </div>
     </>
   );
