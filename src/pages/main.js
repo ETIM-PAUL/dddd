@@ -10,7 +10,7 @@ const SpotifyPlayer = () => {
       <div className="flex">
         <SideBar />
         <div className="block w-[100%]">
-          <Header />
+          {/* <Header /> */}
           <Body />
         </div>
       </div>
