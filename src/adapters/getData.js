@@ -14,7 +14,6 @@ export const fetchPlaylists = async (token) => {
   return data;
 };
 export const fetchPlaylist = async (token, playlist) => {
-  console.log(token);
   const response = await axios.get(
     `https://api.spotify.com/v1/playlists/${playlist}`,
     {
@@ -26,12 +25,12 @@ export const fetchPlaylist = async (token, playlist) => {
   );
   const playlistData = {
     id: response.data.id,
-    image: response.data.images[2],
+    image: response.data.images[1],
     isPublic: response.data.public,
     name: response.data.name,
     description: response.data.description,
     owner: response.data.owner.display_name,
-    track: response.data.tracks.items.map((item) => ({
+    tracks: response.data.tracks.items.map((item) => ({
       id: item.track.id,
       added: item.added_at,
       color: item.primary_color,
@@ -41,6 +40,7 @@ export const fetchPlaylist = async (token, playlist) => {
       artist: item.track.artists.map((artiste) => artiste.name),
     })),
   };
+  console.log(response);
   return playlistData;
   // const data = playlists.data.items?.map(({ name, id }) => {
   //   return { name, id };
