@@ -6,7 +6,6 @@ const Playlists = () => {
   const { state, dispatch } = useSpotify();
 
   useEffect(() => {
-    console.log(fetchPlaylists(state.token));
     fetchPlaylists(state.token).then((response) =>
       dispatch({ type: "setPlaylists", payload: response })
     );
@@ -19,6 +18,7 @@ const Playlists = () => {
           return (
             <li
               key={id}
+              onClick={() => dispatch({ type: "setPlaylist", payload: id })}
               className="text-[14px] hover:text-[#fff] hover:cursor-default py-2 font-black"
             >
               {name}
