@@ -1,4 +1,5 @@
 import React from "react";
+import Body from "../components/Body/Body";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/HeaderNav/Header";
 import SideBar from "../components/SideBar/SideBar";
@@ -8,7 +9,10 @@ const SpotifyPlayer = () => {
     <div>
       <div className="flex">
         <SideBar />
-        <Header />
+        <div className="block w-[100%]">
+          <Header />
+          <Body />
+        </div>
       </div>
       <Footer />
     </div>

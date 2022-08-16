@@ -5,8 +5,10 @@ const SpotifyContext = createContext();
 
 const SpotifyProvider = ({ children }) => {
   const [state, dispatch] = useReducer(spotifyReducer, {
-    token: "",
-    playlists: {},
+    token: null,
+    playlists: [],
+    selectedPlaylist: null,
+    selectedPlaylistData: {},
   });
 
   const value = { state, dispatch };
