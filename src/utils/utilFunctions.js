@@ -8,3 +8,24 @@ export const getTokenFromUrl = () => {
       return initial;
     }, {});
 };
+
+export const getMonthDayYear = (addedDate) => {
+  const month = new Date(addedDate).getMonth();
+  const getMonthValue = (month) => {
+    const date = new Date();
+    date.setMonth(month);
+
+    return date.toLocaleString("en-GB", {
+      month: "short",
+    });
+  };
+  const date = new Date(addedDate).getDate();
+  const year = new Date(addedDate).getFullYear();
+  return getMonthValue(month) + " " + date + ", " + year;
+};
+
+export const durationToMinsAndSecs = (duration) => {
+  const minutes = Math.floor(duration / 60000);
+  const seconds = ((duration % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+};

@@ -1,13 +1,19 @@
 import React from "react";
 import { useSpotify } from "../../context/SpotifyContext";
 import { BsClock } from "react-icons/bs";
+import { MdExplicit } from "react-icons/md";
+import {
+  durationToMinsAndSecs,
+  getMonthDayYear,
+} from "../../utils/utilFunctions";
 
 const PlaylistTable = () => {
   const { state, dispatch } = useSpotify();
   const { token, selectedPlaylist, selectedPlaylistData } = state;
   return (
-    <div className="mt-16 w-[100%]">
-      <div className="row  flex justify-between text-[gray] uppercase text-[13px] font-sans px-12">
+    <div className="mt-8 w-[100%]">
+      {/* Playlist Header */}
+      <div className="grid grid-cols-tableGridHead text-[gray] uppercase text-[13px] font-sans px-8 mx-8">
         <div className="gap-4 flex">
           <span>#</span>
           <span className="hover:text-[#fff] cursor-default">title</span>
@@ -18,48 +24,59 @@ const PlaylistTable = () => {
           <BsClock className="text-[15px] cursor-default" />
         </span>
       </div>
-      <div className="mt-3 bg-[gray] h-[0.5px]" />
+
+      {/* Horizontal Divider */}
+      <div className="mt-2 bg-[gray] h-[0.5px] my-5" />
+
+      {/* Tracks Info */}
       {selectedPlaylistData?.tracks.map(
-        ({ id, album, image, duration, artist }, index) => {
+        (
+          { id, album, image, addedOn, name, isExplicit, duration, artist },
+          index
+        ) => {
           return (
-            <div className="flex justify-between text-[gray] uppercase text-[13px] font-sans px-12">
-              <div className="gap-4 flex">
+            <div
+              className="grid grid-cols-tableGridBody  text-[gray] uppercase text-[13px] font-sans px-8 hover:bg-[#2b2b2b] hover:rounded-md  mx-8"
+              key={id}
+            >
+              <div className="gap-4 flex items-center">
                 <span className="text-[#fff] py-1">{index + 1}</span>
-                <div className="hover:text-[#fff] cursor-default">
+                <div className="hover:text-[#fff] cursor-default flex gap-4 items-center">
                   <img
                     src={image.url}
                     alt="track"
-                    width={40}
-                    height={50}
+                    width={45}
+                    height={55}
                     className="my-2"
                   />
+                  <div className="grid">
+                    <span className="text-[#fff] text-[15px] capitalize font-medium font-sans">
+                      {name}
+                    </span>
+                    <div className="flex items-center gap-1">
+                      {isExplicit ? (
+                        <MdExplicit className="text-[18px]" />
+                      ) : null}
+                      <span className="text-[gray] text-[13px] capitalize font-medium font-sans">
+                        {artist}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <td className="text-[#fff] py-1">{artist}</td>
+              <span className="text-[#b3b3b3] py-1 text-[13px] capitalize self-center font-normal">
+                {album}
+              </span>
+              <span className="text-[#b3b3b3] py-1 self-center capitalize font-normal">
+                {getMonthDayYear(addedOn)}
+              </span>
+              <span className="text-[#b3b3b3] py-1 self-center font-normal">
+                {durationToMinsAndSecs(duration)}
+              </span>
             </div>
           );
         }
       )}
-      {/* <table className="">
-        <tr className="uppercase text-[gray] font-sans text-[12px] flex justify-between px-4">
-          <th>#</th>
-          <th>title</th>
-          <th>album</th>
-          <th>date added</th>
-        </tr>
-        <tr className="">
-          {selectedPlaylistData?.tracks.map(
-            ({ id, album, image, duration, artist }, index) => {
-              return (
-                <>
-                  <td className="text-[#fff] py-1">{index + 1}</td>;
-                  <td className="text-[#fff] py-1">{artist}</td>;
-                </>
-              );
-            }
-          )}
-        </tr>
-      </table> */}
     </div>
   );
 };

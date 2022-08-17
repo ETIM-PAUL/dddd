@@ -25,17 +25,19 @@ export const fetchPlaylist = async (token, playlist) => {
   );
   const playlistData = {
     id: response.data.id,
-    image: response.data.images[1],
+    image: response.data.images[0],
     isPublic: response.data.public,
     name: response.data.name,
     description: response.data.description,
     owner: response.data.owner.display_name,
     tracks: response.data.tracks.items.map((item) => ({
       id: item.track.id,
-      added: item.added_at,
+      name: item.track.name,
+      isExplicit: item.track.explicit,
+      addedOn: item.added_at,
       color: item.primary_color,
       album: item.track.album.name,
-      image: item.track.album.images[2],
+      image: item.track.album.images[0],
       duration: item.track.duration_ms,
       artist: item.track.artists.map((artiste) => artiste.name),
     })),
