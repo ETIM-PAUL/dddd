@@ -8,9 +8,9 @@ import { SpotifyProvider } from "./context/SpotifyContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <SpotifyProvider>
-    <React.StrictMode>
+  <React.StrictMode>
+    <SpotifyProvider>
       <App />
-    </React.StrictMode>
-  </SpotifyProvider>
+    </SpotifyProvider>
+  </React.StrictMode>
 );

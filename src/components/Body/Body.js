@@ -19,8 +19,8 @@ const Body = () => {
   return (
     <div className="bg-blend h-[93.1vh]">
       {Object.keys(selectedPlaylistData).length > 0 && (
-        <div className=" py-4 h-[75vh] overflow-scroll ">
-          <div className="flex px-8 gap-8 py-5 bg-[#a9a9a9]">
+        <div className=" py- h-[75vh] overflow-scroll ">
+          <div className="flex px-8 gap-8 py-5 bg-[#2b2b2b]">
             <img
               src={selectedPlaylistData.image?.url}
               alt="playlist"
@@ -36,10 +36,10 @@ const Body = () => {
               <h1 className="text-[100px] text-[#fff] leading-[1em] mt-2 font-bold tracking-[-4px] font-sans">
                 {selectedPlaylistData.name}
               </h1>
-              <p className="text-[gray] mt-4">
+              <p className="text-[#b3b3b3] mt-4">
                 {selectedPlaylistData.description}
               </p>
-              <div className="flex gap-1 mt-1 text-[#eee] font-sans ">
+              <div className="flex gap-1 mt-1 text-[#b3b3b3] font-sans ">
                 <span className="font-semibold">
                   {selectedPlaylistData.owner}
                 </span>
