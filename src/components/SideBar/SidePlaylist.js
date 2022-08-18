@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { fetchPlaylists } from "../../adapters/getData";
 import { useSpotify } from "../../context/SpotifyContext";
+import { Link } from "react-router-dom";
 
 const Playlists = () => {
   const { state, dispatch } = useSpotify();
@@ -16,13 +17,14 @@ const Playlists = () => {
       <ul>
         {state?.playlists.map(({ name, id }) => {
           return (
-            <li
-              key={id}
-              onClick={() => dispatch({ type: "setPlaylist", payload: id })}
-              className="text-[14px] hover:text-[#fff] hover:cursor-default py-2 font-black"
-            >
-              {name}
-            </li>
+            <Link to={`/playlist/${id}`} key={id}>
+              <li
+                onClick={() => dispatch({ type: "setPlaylist", payload: id })}
+                className="text-[14px] hover:text-[#fff] hover:cursor-default py-2 font-black"
+              >
+                {name}
+              </li>
+            </Link>
           );
         })}
       </ul>
