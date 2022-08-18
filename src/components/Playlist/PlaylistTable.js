@@ -8,8 +8,8 @@ import {
 } from "../../utils/utilFunctions";
 
 const PlaylistTable = () => {
-  const { state, dispatch } = useSpotify();
-  const { token, selectedPlaylist, selectedPlaylistData } = state;
+  const { state } = useSpotify();
+  const { selectedPlaylistData } = state;
   return (
     <div className="mt-8 w-[100%]">
       {/* Playlist Header */}

@@ -11,6 +11,7 @@ const SpotifyPlayer = () => {
         <SideBar />
         <div className="block w-[100%]">
           {/* <Header /> */}
+
           <Body />
         </div>
       </div>
