@@ -1,0 +1,22 @@
+import axios from "axios";
+
+export const changeVolume = async (token, value) => {
+  console.log(value);
+  try {
+    const response = await axios.put(
+      "https://api.spotify.com/v1/me/player/volume",
+      {},
+      {
+        params: {
+          volume_percent: parseInt(value),
+        },
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};

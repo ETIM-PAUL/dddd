@@ -58,7 +58,7 @@ const PlaylistTable = () => {
                         <MdExplicit className="text-[18px]" />
                       ) : null}
                       <span className="text-[gray] text-[13px] capitalize font-medium font-sans">
-                        {artist}
+                        {artist.join(", ")}
                       </span>
                     </div>
                   </div>

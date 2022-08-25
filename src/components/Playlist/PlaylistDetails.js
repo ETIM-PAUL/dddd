@@ -12,7 +12,6 @@ const PlaylistDetails = () => {
     if (selectedPlaylist !== null) {
       fetchPlaylist(token, selectedPlaylist).then((response) => {
         dispatch({ type: "setPlaylistData", payload: response });
-        console.log(response);
       });
     }
   }, [dispatch, selectedPlaylist, token]);
