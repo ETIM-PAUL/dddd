@@ -5,27 +5,28 @@ import { BsVolumeDown, BsVolumeMute } from "react-icons/bs";
 const Volume = () => {
   const [mute, setMute] = useState(false);
   const [volumeVal, setVolumeVal] = useState(30);
-  console.log(volumeVal);
 
   const { state, dispatch } = useSpotify();
   const { token } = state;
-  const toggleVolume = (volumeVal) => {
-    setMute(!mute);
+  const toggleVolume = (mute) => {
     if (mute === false) {
       changeVolume(token, 0);
+      setMute(true);
+    } else {
+      setMute(false);
+      changeVolume(token, volumeVal);
     }
   };
   const setVolumeValue = (value) => {
     setVolumeVal(value);
-    changeVolume(token, volumeVal);
+    changeVolume(token, value);
     if (value === 0) {
       setMute(true);
     }
   };
-  // useEffect(() => {}, [dispatch, token]);
 
   return (
-    <>
+    <div className="flex gap-1">
       {mute ? (
         <BsVolumeMute
           className="text-[25px] text-[gray] hover:text-[#fff] self-center"
@@ -34,7 +35,7 @@ const Volume = () => {
       ) : (
         <BsVolumeDown
           className="text-[25px] text-[gray] hover:text-[#fff]"
-          onClick={() => toggleVolume(volumeVal)}
+          onClick={() => toggleVolume(mute)}
         />
       )}
       <div className="flex items-center">
@@ -42,11 +43,11 @@ const Volume = () => {
           type="range"
           min={0}
           max={100}
-          className="w-[6rem] h-[0.3rem] p-[0] "
+          className="w-[6rem] h-[0.3rem]"
           onMouseUp={(e) => setVolumeValue(e.target.value)}
         />
       </div>
-    </>
+    </div>
   );
 };
 

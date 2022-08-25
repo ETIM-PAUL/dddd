@@ -12,8 +12,8 @@ import {
   BsStack,
 } from "react-icons/bs";
 import { TbMicrophone2 } from "react-icons/tb";
-import { MdOutlineQueueMusic } from "react-icons/md";
 import { fetchCurrentlyPlaying } from "../../adapters/getData";
+import { pausePlaying } from "../../adapters/setData";
 import { useSpotify } from "../../context/SpotifyContext";
 import Volume from "./Volume";
 
@@ -23,7 +23,11 @@ const Footer = () => {
   const { token } = state;
   const { name, artistes, duration, image } = state.currentlyPlayingTrack;
 
-  const togglePlay = () => {
+  const pausePlayer = () => {
+    setPlaying(!playing);
+    pausePlaying(token);
+  };
+  const startPlayer = () => {
     setPlaying(!playing);
   };
   useEffect(() => {
@@ -64,12 +68,12 @@ const Footer = () => {
               {!playing ? (
                 <BsFillPlayCircleFill
                   className="text-[45px] text-[#fff]"
-                  onClick={() => togglePlay()}
+                  onClick={() => startPlayer()}
                 />
               ) : (
                 <BsFillPauseCircleFill
                   className="text-[45px] text-[#fff]"
-                  onClick={() => togglePlay()}
+                  onClick={() => pausePlayer()}
                 />
               )}
               <BiSkipNext className="text-[30px] text-[gray] hover:text-[#fff]" />
@@ -78,7 +82,7 @@ const Footer = () => {
             <div></div>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-3">
             <TbMicrophone2 className="text-[20px] text-[gray] hover:text-[#fff] self-center" />
             <BiDevices className="text-[20px] text-[gray] hover:text-[#fff] self-center" />
             <BsStack className="text-[20px] text-[gray] hover:text-[#fff] self-center" />
