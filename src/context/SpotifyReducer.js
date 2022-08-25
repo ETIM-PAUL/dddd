@@ -6,6 +6,18 @@ export function spotifyReducer(state, { type, payload }) {
         token: payload,
       };
     }
+    case "setPlayingTrack": {
+      return {
+        ...state,
+        currentlyPlayingTrack: payload,
+      };
+    }
+    case "setPlayingState": {
+      return {
+        ...state,
+        playingState: payload,
+      };
+    }
     case "setPlaylists": {
       return {
         ...state,

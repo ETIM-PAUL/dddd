@@ -42,11 +42,35 @@ export const fetchPlaylist = async (token, playlist) => {
       artist: item.track.artists.map((artiste) => artiste.name),
     })),
   };
-  console.log(response);
   return playlistData;
-  // const data = playlists.data.items?.map(({ name, id }) => {
-  //   return { name, id };
-  // });
+};
+
+export const fetchCurrentlyPlaying = async (token) => {
+  try {
+    const response = await axios.get(
+      "https://api.spotify.com/v1/me/player/currently-playing",
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const { item } = response.data;
+
+    const currentlyPlaying = {
+      id: item.id,
+      name: item.name,
+      artistes: item.artists.map((artiste) => artiste.name),
+      duration: item.duration_ms,
+      image: item.album.images[2].url,
+    };
+
+    return currentlyPlaying;
+  } catch (error) {
+    console.log(error);
+  }
 
   // return data;
 };
