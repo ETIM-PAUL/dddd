@@ -5,7 +5,7 @@ import {
   fetchPlayerState,
 } from "../../adapters/getData";
 import { useSpotify } from "../../context/SpotifyContext";
-import SpotifyPlayerController from "./Player";
+import SpotifyPlayerController from "./PlayerController";
 import PlayingTrack from "./PlayingTrack";
 import Volume from "./Volume";
 

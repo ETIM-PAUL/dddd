@@ -1,11 +1,12 @@
 import React from "react";
+import { BiShuffle, BiRepeat } from "react-icons/bi";
+import { CgPlayTrackNext, CgPlayTrackPrev } from "react-icons/cg";
 import {
-  BiSkipNext,
-  BiSkipPrevious,
-  BiShuffle,
-  BiRepeat,
-} from "react-icons/bi";
-import { pausePlaying, startPlaying } from "../../adapters/setData";
+  pausePlaying,
+  skipToNextTrack,
+  skipToPrevTrack,
+  startPlaying,
+} from "../../adapters/setData";
 import { BsFillPlayCircleFill, BsFillPauseCircleFill } from "react-icons/bs";
 import { useSpotify } from "../../context/SpotifyContext";
 
@@ -20,11 +21,20 @@ const SpotifyPlayerController = () => {
     dispatch({ type: "setPlayingState", payload: true });
     startPlaying(currentlyPlayingTrack, token);
   };
+  const skipNext = () => {
+    skipToNextTrack(token);
+  };
+  const skipPrev = () => {
+    skipToPrevTrack(token);
+  };
   return (
     <div className="block">
       <div className="flex gap-4 items-center">
         <BiShuffle className="text-[20px] text-[gray] hover:text-[#fff]" />
-        <BiSkipPrevious className="text-[30px] text-[gray] hover:text-[#fff]" />
+        <CgPlayTrackPrev
+          className="text-[35px] text-[gray] hover:text-[#fff]"
+          onClick={() => skipPrev()}
+        />
         {!playingState ? (
           <BsFillPlayCircleFill
             className="text-[45px] text-[#fff]"
@@ -36,7 +46,10 @@ const SpotifyPlayerController = () => {
             onClick={() => pausePlayer()}
           />
         )}
-        <BiSkipNext className="text-[30px] text-[gray] hover:text-[#fff]" />
+        <CgPlayTrackNext
+          className="text-[35px] text-[gray] hover:text-[#fff]"
+          onClick={() => skipNext()}
+        />
         <BiRepeat className="text-[20px] text-[gray] hover:text-[#fff]" />
       </div>
       <div></div>

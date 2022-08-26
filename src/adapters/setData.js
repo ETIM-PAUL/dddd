@@ -55,3 +55,35 @@ export const pausePlaying = async (token) => {
     console.log(error);
   }
 };
+export const skipToNextTrack = async (token) => {
+  try {
+    await axios.post(
+      "https://api.spotify.com/v1/me/player/next",
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const skipToPrevTrack = async (token) => {
+  try {
+    await axios.post(
+      "https://api.spotify.com/v1/me/player/previous",
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
