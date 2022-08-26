@@ -14,9 +14,10 @@ const Footer = () => {
   const { token } = state;
 
   useEffect(() => {
-    fetchPlayerState(token).then((response) =>
-      dispatch({ type: "setPlayingState", payload: response })
-    );
+    fetchPlayerState(token).then((response) => {
+      dispatch({ type: "setPlayingState", payload: response.isPlaying });
+      dispatch({ type: "setPlayerVolume", payload: response.volume });
+    });
     fetchCurrentlyPlaying(token).then((response) => {
       dispatch({ type: "setPlayingTrack", payload: response });
     });

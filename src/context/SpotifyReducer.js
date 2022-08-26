@@ -18,6 +18,12 @@ export function spotifyReducer(state, { type, payload }) {
         playingState: payload,
       };
     }
+    case "setPlayerVolume": {
+      return {
+        ...state,
+        playerVolume: payload,
+      };
+    }
     case "setPlaylists": {
       return {
         ...state,

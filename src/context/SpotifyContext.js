@@ -10,7 +10,7 @@ const SpotifyProvider = ({ children }) => {
     selectedPlaylist: null,
     selectedPlaylistData: {},
     currentlyPlayingTrack: {},
-    playingState: false,
+    playingState: {},
   });
 
   const value = { state, dispatch };

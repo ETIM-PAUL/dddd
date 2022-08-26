@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { changeVolume } from "../../adapters/setData";
 import { useSpotify } from "../../context/SpotifyContext";
 import { TbMicrophone2 } from "react-icons/tb";
@@ -7,10 +7,15 @@ import { BiDevices } from "react-icons/bi";
 import { BsVolumeDown, BsVolumeMute, BsStack } from "react-icons/bs";
 const Volume = () => {
   const [mute, setMute] = useState(false);
-  const [volumeVal, setVolumeVal] = useState(30);
+  const [volumeVal, setVolumeVal] = useState("");
 
-  const { state } = useSpotify();
-  const { token } = state;
+  const { state, dispatch } = useSpotify();
+  const { token, playerVolume } = state;
+
+  useEffect(() => {
+    setVolumeVal(playerVolume);
+  }, [playerVolume]);
+
   const toggleVolume = (mute) => {
     if (mute === false) {
       changeVolume(token, 0);
@@ -50,8 +55,9 @@ const Volume = () => {
             type="range"
             min={0}
             max={100}
+            value={volumeVal || ""}
             className="w-[6rem] h-[0.3rem]"
-            onMouseUp={(e) => setVolumeValue(e.target.value)}
+            onChange={(e) => setVolumeValue(e.target.value)}
           />
         </div>
       </div>

@@ -83,8 +83,11 @@ export const fetchPlayerState = async (token) => {
       },
     });
 
-    console.log(response);
-    return response.data.is_playing;
+    const playerState = {
+      isPlaying: response.data.is_playing,
+      volume: response.data.device.volume_percent,
+    };
+    return playerState;
   } catch (error) {
     console.log(error);
   }
