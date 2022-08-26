@@ -20,21 +20,20 @@ export const changeVolume = async (token, value) => {
   }
 };
 
-export const startPlayer = async (token, value) => {
+export const startPlaying = async ({ id, name, artistes, image }, token) => {
   try {
-    await axios.put(
-      "https://api.spotify.com/v1/me/player/volume",
+    const response = await axios.put(
+      "https://api.spotify.com/v1/me/player/play",
       {},
       {
-        params: {
-          volume_percent: parseInt(value),
-        },
+        position_ms: 0,
         headers: {
           Authorization: "Bearer " + token,
           "Content-Type": "application/json",
         },
       }
     );
+    return response;
   } catch (error) {
     console.log(error);
   }
