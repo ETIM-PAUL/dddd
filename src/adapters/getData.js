@@ -58,7 +58,7 @@ export const fetchCurrentlyPlaying = async (token) => {
     );
 
     const { item } = response.data;
-
+    // console.log(item);
     const currentlyPlaying = {
       id: item.id,
       name: item.name,
@@ -68,6 +68,23 @@ export const fetchCurrentlyPlaying = async (token) => {
     };
 
     return currentlyPlaying;
+  } catch (error) {
+    console.log(error);
+  }
+
+  // return data;
+};
+export const fetchPlayerState = async (token) => {
+  try {
+    const response = await axios.get("https://api.spotify.com/v1/me/player", {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log(response);
+    return response.data.is_playing;
   } catch (error) {
     console.log(error);
   }
