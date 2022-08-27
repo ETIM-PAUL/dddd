@@ -16,7 +16,7 @@ const PlayingTrack = () => {
   return (
     <>
       {Object.keys(playingTrack).length > 0 && (
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center w-50">
           <img alt="" src={image} />
           <div className="grid">
             <p className="text-[#fff] hover:underline hover:cursor-pointer ">

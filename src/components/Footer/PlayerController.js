@@ -9,6 +9,7 @@ import {
 } from "../../adapters/setData";
 import { BsFillPlayCircleFill, BsFillPauseCircleFill } from "react-icons/bs";
 import { useSpotify } from "../../context/SpotifyContext";
+import { fetchCurrentlyPlaying } from "../../adapters/getData";
 
 const SpotifyPlayerController = () => {
   const { state, dispatch } = useSpotify();
@@ -24,10 +25,16 @@ const SpotifyPlayerController = () => {
   const skipNext = () => {
     skipToNextTrack(token);
     dispatch({ type: "setPlayingState", payload: true });
+    fetchCurrentlyPlaying(token).then((response) => {
+      dispatch({ type: "setPlayingTrack", payload: response });
+    });
   };
   const skipPrev = () => {
     skipToPrevTrack(token);
     dispatch({ type: "setPlayingState", payload: true });
+    fetchCurrentlyPlaying(token).then((response) => {
+      dispatch({ type: "setPlayingTrack", payload: response });
+    });
   };
   return (
     <div className="block">

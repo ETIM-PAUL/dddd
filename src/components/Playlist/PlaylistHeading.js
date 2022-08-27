@@ -6,7 +6,7 @@ const PlaylistHeading = () => {
   const { selectedPlaylistData } = state;
 
   return (
-    <div className="flex  gap-8  py-6  px-8">
+    <div className="flex  gap-8  py-6 px-8">
       <img
         src={selectedPlaylistData.image?.url}
         alt="playlist"

@@ -5,10 +5,10 @@ import SideBar from "../components/SideBar/SideBar";
 
 const SpotifyPlayer = () => {
   return (
-    <div>
-      <div className="flex w-[100%]">
+    <div className="h-[100%]">
+      <div className="flex h-[90vh]">
         <SideBar />
-        <div className="block">
+        <div className="inline-block ">
           <Body />
         </div>
       </div>

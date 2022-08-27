@@ -5,20 +5,30 @@ import HomePage from "../../pages/Home";
 import Header from "../HeaderNav/Header";
 const Body = () => {
   const contentRef = useRef();
-  const [mainHeaderBg, setMainHeaderBG] = useState(false);
+  const [headerBg, setHeaderBG] = useState(false);
+  const [tableHeading, setTableHeading] = useState(false);
+  const contentScroll = () => {
+    let scrollTopValue = contentRef.current.scrollTop;
+    // console.log(scrollTopValue);
+    scrollTopValue >= 247 ? setHeaderBG(true) : setHeaderBG(false);
+    scrollTopValue >= 380 ? setTableHeading(true) : setTableHeading(false);
+  };
 
   return (
-    <div className="bg-blend h-[89vh]">
-      <div className="h-[89vh] overflow-scroll">
-        <div className="bg-[#2b2b2b]">
-          <Header />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/playlist/:id" element={<Playlist />} />
-          </Routes>
-        </div>
-        {/* <div className="mb-12"></div> */}
-      </div>
+    <div
+      className="h-[90vh] overflow-scroll bg-blend absolute"
+      ref={contentRef}
+      onScroll={contentScroll}
+    >
+      <Header headerBg={headerBg} />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/playlist/:id"
+          element={<Playlist tableHeading={tableHeading} />}
+        />
+      </Routes>
+      {/* <div className="mb-12"></div> */}
     </div>
   );
 };

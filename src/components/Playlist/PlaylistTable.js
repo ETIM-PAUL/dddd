@@ -7,28 +7,36 @@ import {
   getMonthDayYear,
 } from "../../utils/utilFunctions";
 
-const PlaylistTable = () => {
+const PlaylistTable = ({ tableHeading }) => {
   const { state } = useSpotify();
-  const notPlaying = "text-[#fff] text-[15px] capitalize font-medium font-sans";
-  const playing = "text-[#1ad760] text-[15px] capitalize font-medium font-sans";
+  const notPlaying =
+    "text-[#fff] text-[15px] normal-case font-medium font-sans";
+  const playing =
+    "text-[#1ad760] text-[15px] normal-case font-medium font-sans";
   const { selectedPlaylistData, currentlyPlayingTrack } = state;
   return (
-    <div className="mt-8 w-[100%] px-8">
-      {/* Playlist Header */}
-      <div className="grid grid-cols-tableGridHead text-[gray] uppercase text-[13px] font-sans mx-8 sticky top-[75px] z-30">
-        <div className="gap-4 flex">
-          <span className="text-[15px] font-bold">#</span>
-          <span className="hover:text-[#fff] cursor-default">title</span>
+    <div className="mt-4 w-[100%]  pb-8">
+      {/* Playlist Table Headings */}
+      <div className={tableHeading ? "sticky top-[70px] bg-[#181818]" : ""}>
+        <div className="grid grid-cols-tableGridHead text-[#b3b3b3] uppercase text-[13px] px-[3.5rem] font-sans items-center pt-2">
+          <div className="gap-4 flex items-center">
+            <span className="text-[15px] font-bold">#</span>
+            <span className="hover:text-[#fff] cursor-default">title</span>
+          </div>
+          <span className="hover:text-[#fff] cursor-default">album</span>
+          <span className="hover:text-[#fff] cursor-default">date added</span>
+          <span className="hover:text-[#fff] cursor-default">
+            <BsClock className="text-[15px] cursor-default" />
+          </span>
         </div>
-        <span className="hover:text-[#fff] cursor-default">album</span>
-        <span className="hover:text-[#fff] cursor-default">date added</span>
-        <span className="hover:text-[#fff] cursor-default">
-          <BsClock className="text-[15px] cursor-default" />
-        </span>
+        <hr
+          className={
+            tableHeading
+              ? "border-t-[gray]  mt-2 mb-4"
+              : "border-t-[gray] mt-2 mx-8 mb-4"
+          }
+        />
       </div>
-
-      {/* Horizontal Divider */}
-      <div className="mt-2 bg-[gray] h-[0.5px] my-5 sticky top-[100px] z-30" />
 
       {/* Tracks Info */}
       {selectedPlaylistData?.tracks.map(
@@ -38,7 +46,7 @@ const PlaylistTable = () => {
         ) => {
           return (
             <div
-              className="grid grid-cols-tableGridBody  text-[gray] uppercase text-[13px] font-sans px-8 hover:bg-[#2b2b2b] hover:rounded-md z-20"
+              className="grid grid-cols-tableGridBody text-[gray] uppercase text-[13px] font-sans px-[3.5rem] hover:bg-[#2b2b2b] hover:rounded-md z-20"
               key={id}
             >
               <div className="gap-4 flex items-center">
