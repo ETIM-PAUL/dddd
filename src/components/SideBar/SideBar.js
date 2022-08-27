@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const SideBar = () => {
   return (
-    <div className="bg-[#000]  w-60 min-w-60 z-30 block px-6">
+    <div className="bg-[#000] resize-y w-[30vh] z-30 block px-6">
       <img
         src="https://music-b26f.kxcdn.com/wp-content/uploads/2017/06/635963274692858859903160895_spotify-logo-horizontal-black.jpg"
         alt="spotify-logo"

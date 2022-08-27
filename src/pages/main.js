@@ -8,9 +8,7 @@ const SpotifyPlayer = () => {
     <div className="h-[100%]">
       <div className="flex h-[90vh]">
         <SideBar />
-        <div className="inline-block ">
-          <Body />
-        </div>
+        <Body />
       </div>
       <Footer />
     </div>
