@@ -1,48 +1,59 @@
 import axios from "axios";
 
 export const fetchPlaylists = async (token) => {
-  const response = await axios.get("https://api.spotify.com/v1/me/playlists", {
-    headers: {
-      Authorization: "Bearer " + token,
-      "Content-Type": "application/json",
-    },
-  });
-  const data = response.data.items?.map(({ name, id }) => {
-    return { name, id };
-  });
+  try {
+    const response = await axios.get(
+      "https://api.spotify.com/v1/me/playlists",
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data.items?.map(({ name, id }) => {
+      return { name, id };
+    });
 
-  return data;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 export const fetchPlaylist = async (token, playlist) => {
-  const response = await axios.get(
-    `https://api.spotify.com/v1/playlists/${playlist}`,
-    {
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  const playlistData = {
-    id: response.data.id,
-    image: response.data.images[0],
-    isPublic: response.data.public,
-    name: response.data.name,
-    description: response.data.description,
-    owner: response.data.owner.display_name,
-    tracks: response.data.tracks.items.map((item) => ({
-      id: item.track.id,
-      name: item.track.name,
-      isExplicit: item.track.explicit,
-      addedOn: item.added_at,
-      color: item.primary_color,
-      album: item.track.album.name,
-      image: item.track.album.images[0],
-      duration: item.track.duration_ms,
-      artist: item.track.artists.map((artiste) => artiste.name),
-    })),
-  };
-  return playlistData;
+  try {
+    const response = await axios.get(
+      `https://api.spotify.com/v1/playlists/${playlist}`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const playlistData = {
+      id: response.data.id,
+      image: response.data.images[0],
+      isPublic: response.data.public,
+      name: response.data.name,
+      description: response.data.description,
+      owner: response.data.owner.display_name,
+      tracks: response.data.tracks.items.map((item) => ({
+        id: item.track.id,
+        name: item.track.name,
+        isExplicit: item.track.explicit,
+        addedOn: item.added_at,
+        color: item.primary_color,
+        album: item.track.album.name,
+        image: item.track.album.images[0],
+        duration: item.track.duration_ms,
+        artist: item.track.artists.map((artiste) => artiste.name),
+      })),
+    };
+    return playlistData;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const fetchCurrentlyPlaying = async (token) => {
@@ -66,7 +77,6 @@ export const fetchCurrentlyPlaying = async (token) => {
       duration: item.duration_ms,
       image: item.album.images[2].url,
     };
-
     return currentlyPlaying;
   } catch (error) {
     console.log(error);
@@ -87,6 +97,7 @@ export const fetchPlayerState = async (token) => {
       isPlaying: response.data.is_playing,
       volume: response.data.device.volume_percent,
     };
+
     return playerState;
   } catch (error) {
     console.log(error);

@@ -20,7 +20,7 @@ const Playlists = () => {
             <Link to={`/playlist/${id}`} key={id}>
               <li
                 onClick={() => dispatch({ type: "setPlaylist", payload: id })}
-                className="text-[14px] hover:text-[#fff] hover:cursor-default py-2 font-black"
+                className="text-[14px] hover:text-[#fff] hover:cursor-default py-2 font-medium font-sans"
               >
                 {name}
               </li>

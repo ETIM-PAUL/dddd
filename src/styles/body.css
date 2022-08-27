@@ -2,3 +2,8 @@
   background: linear-gradient(transparent, rgba(0, 0, 0, 1));
   background-color: #181818;
 }
+
+.scroll-bg-colour {
+  background-color: #2f2f31 !important;
+  box-shadow: 0 0.375rem 0.875rem rgb(0 0 0 / 10%);
+}

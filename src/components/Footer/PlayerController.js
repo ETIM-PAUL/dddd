@@ -23,9 +23,11 @@ const SpotifyPlayerController = () => {
   };
   const skipNext = () => {
     skipToNextTrack(token);
+    dispatch({ type: "setPlayingState", payload: true });
   };
   const skipPrev = () => {
     skipToPrevTrack(token);
+    dispatch({ type: "setPlayingState", payload: true });
   };
   return (
     <div className="block">
