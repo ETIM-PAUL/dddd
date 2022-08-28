@@ -1,36 +1,22 @@
 import React from "react";
 import { BiShuffle, BiRepeat } from "react-icons/bi";
 import { CgPlayTrackNext, CgPlayTrackPrev } from "react-icons/cg";
-import {
-  pausePlaying,
-  skipToNextTrack,
-  skipToPrevTrack,
-  startPlaying,
-} from "../../adapters/setData";
+import { playerState, skipTrack } from "../../adapters/setData";
 import { BsFillPlayCircleFill, BsFillPauseCircleFill } from "react-icons/bs";
 import { useSpotify } from "../../context/SpotifyContext";
 import { fetchCurrentlyPlaying } from "../../adapters/getData";
 
 const SpotifyPlayerController = () => {
   const { state, dispatch } = useSpotify();
-  const { token, playingState, currentlyPlayingTrack } = state;
-  const pausePlayer = () => {
-    dispatch({ type: "setPlayingState", payload: false });
-    pausePlaying(token);
+  const { token, playingState } = state;
+  const playerPlayingState = (type) => {
+    playerState(type, token);
+    if (type === "pause") {
+      dispatch({ type: "setPlayingState", payload: false });
+    } else dispatch({ type: "setPlayingState", payload: true });
   };
-  const startPlayer = () => {
-    dispatch({ type: "setPlayingState", payload: true });
-    startPlaying(currentlyPlayingTrack, token);
-  };
-  const skipNext = () => {
-    skipToNextTrack(token);
-    dispatch({ type: "setPlayingState", payload: true });
-    fetchCurrentlyPlaying(token).then((response) => {
-      dispatch({ type: "setPlayingTrack", payload: response });
-    });
-  };
-  const skipPrev = () => {
-    skipToPrevTrack(token);
+  const skipPlayingTrack = async (type) => {
+    skipTrack(type, token);
     dispatch({ type: "setPlayingState", payload: true });
     fetchCurrentlyPlaying(token).then((response) => {
       dispatch({ type: "setPlayingTrack", payload: response });
@@ -42,22 +28,22 @@ const SpotifyPlayerController = () => {
         <BiShuffle className="text-[20px] text-[gray] hover:text-[#fff]" />
         <CgPlayTrackPrev
           className="text-[35px] text-[gray] hover:text-[#fff]"
-          onClick={() => skipPrev()}
+          onClick={() => skipPlayingTrack("previous")}
         />
         {!playingState ? (
           <BsFillPlayCircleFill
             className="text-[45px] text-[#fff]"
-            onClick={() => startPlayer()}
+            onClick={() => playerPlayingState("play")}
           />
         ) : (
           <BsFillPauseCircleFill
             className="text-[45px] text-[#fff]"
-            onClick={() => pausePlayer()}
+            onClick={() => playerPlayingState("pause")}
           />
         )}
         <CgPlayTrackNext
           className="text-[35px] text-[gray] hover:text-[#fff]"
-          onClick={() => skipNext()}
+          onClick={() => skipPlayingTrack("next")}
         />
         <BiRepeat className="text-[20px] text-[gray] hover:text-[#fff]" />
       </div>

@@ -15,7 +15,7 @@ const PlayingTrack = () => {
 
   return (
     <>
-      {Object.keys(playingTrack).length > 0 && (
+      {currentlyPlayingTrack && (
         <div className="flex gap-4 items-center w-50">
           <img alt="" src={image} />
           <div className="grid">

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const changeVolume = async (token, value) => {
   try {
-    const response = await axios.put(
+    await axios.put(
       "https://api.spotify.com/v1/me/player/volume",
       {},
       {
@@ -20,10 +20,10 @@ export const changeVolume = async (token, value) => {
   }
 };
 
-export const startPlaying = async ({ id, name, artistes, image }, token) => {
+export const playerState = async (type, token) => {
   try {
-    const response = await axios.put(
-      "https://api.spotify.com/v1/me/player/play",
+    await axios.put(
+      `https://api.spotify.com/v1/me/player/${type}`,
       {},
       {
         position_ms: 0,
@@ -33,48 +33,15 @@ export const startPlaying = async ({ id, name, artistes, image }, token) => {
         },
       }
     );
-    return response;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const pausePlaying = async (token) => {
-  try {
-    await axios.put(
-      "https://api.spotify.com/v1/me/player/pause",
-      {},
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
-};
-export const skipToNextTrack = async (token) => {
+export const skipTrack = async (type, token) => {
   try {
     await axios.post(
-      "https://api.spotify.com/v1/me/player/next",
-      {},
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
-};
-export const skipToPrevTrack = async (token) => {
-  try {
-    await axios.post(
-      "https://api.spotify.com/v1/me/player/previous",
+      `https://api.spotify.com/v1/me/player/${type}`,
       {},
       {
         headers: {

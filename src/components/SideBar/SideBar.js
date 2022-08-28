@@ -1,6 +1,6 @@
 import React from "react";
 import SideBarComponent from "./SideBarComponents";
-import { MdHomeFilled, MdSearch } from "react-icons/md";
+import { MdHomeFilled } from "react-icons/md";
 import { VscLibrary } from "react-icons/vsc";
 import { BsPlusSquare } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
@@ -20,7 +20,9 @@ const SideBar = () => {
         <Link to="/">
           <SideBarComponent icon={<MdHomeFilled />} title="Home" />
         </Link>
-        <SideBarComponent icon={<FiSearch />} title="Search" />
+        <Link to="/search">
+          <SideBarComponent icon={<FiSearch />} title="Search" />
+        </Link>
         <SideBarComponent icon={<VscLibrary />} title="Your Library" />
         <div className="my-4" />
         <SideBarComponent icon={<BsPlusSquare />} title="Create Playlist" />

@@ -13,25 +13,18 @@ import {
   MdOutlineDownloadForOffline,
   MdOutlinePersonAdd,
 } from "react-icons/md";
-import { pausePlaying, startPlaying } from "../../adapters/setData";
+import { playerState } from "../../adapters/setData";
 import PlaylistHeading from "../../components/Playlist/PlaylistHeading";
 
 const PlaylistDetails = ({ tableHeading }) => {
   const { state, dispatch } = useSpotify();
-  const {
-    token,
-    selectedPlaylist,
-    playingState,
-    selectedPlaylistData,
-    currentlyPlayingTrack,
-  } = state;
-  const pausePlayer = () => {
-    dispatch({ type: "setPlayingState", payload: false });
-    pausePlaying(token);
-  };
-  const startPlayer = () => {
-    dispatch({ type: "setPlayingState", payload: true });
-    startPlaying(currentlyPlayingTrack, token);
+  const { token, selectedPlaylist, playingState, selectedPlaylistData } = state;
+
+  const setPlayerState = (type) => {
+    playerState(type, token);
+    if (type === "pause") {
+      dispatch({ type: "setPlayingState", payload: false });
+    } else dispatch({ type: "setPlayingState", payload: true });
   };
 
   useEffect(() => {
@@ -54,12 +47,12 @@ const PlaylistDetails = ({ tableHeading }) => {
                     {!playingState ? (
                       <BsFillPlayCircleFill
                         className="text-[#1ad760] text-[55px]"
-                        onClick={() => startPlayer()}
+                        onClick={() => setPlayerState("play")}
                       />
                     ) : (
                       <BsFillPauseCircleFill
                         className="text-[#1ad760] text-[55px]"
-                        onClick={() => pausePlayer()}
+                        onClick={() => setPlayerState("pause")}
                       />
                     )}
                     <MdOutlineDownloadForOffline className="text-[#b3b3b3] text-[35px]" />

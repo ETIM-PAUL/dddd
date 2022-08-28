@@ -68,16 +68,18 @@ export const fetchCurrentlyPlaying = async (token) => {
       }
     );
 
-    const { item } = response.data;
-    // console.log(item);
-    const currentlyPlaying = {
-      id: item.id,
-      name: item.name,
-      artistes: item.artists.map((artiste) => artiste.name),
-      duration: item.duration_ms,
-      image: item.album.images[2].url,
-    };
-    return currentlyPlaying;
+    if (response.data !== "") {
+      const { item } = response.data;
+      // console.log(item);
+      const currentlyPlaying = {
+        id: item.id,
+        name: item.name,
+        artistes: item.artists.map((artiste) => artiste.name),
+        duration: item.duration_ms,
+        image: item.album.images[2].url,
+      };
+      return currentlyPlaying;
+    } else return null;
   } catch (error) {
     console.log(error);
   }

@@ -20,9 +20,11 @@ const Volume = () => {
     if (mute === false) {
       changeVolume(token, 0);
       setMute(true);
+      dispatch({ type: "setPlayerVolume", payload: 0 });
     } else {
-      setMute(false);
       changeVolume(token, volumeVal);
+      setMute(false);
+      dispatch({ type: "setPlayerVolume", payload: volumeVal });
     }
   };
   const setVolumeValue = (value) => {
@@ -31,23 +33,35 @@ const Volume = () => {
     if (value === 0) {
       setMute(true);
     }
+    dispatch({ type: "setPlayerVolume", payload: value });
   };
 
   return (
     <div className="flex gap-3">
-      <TbMicrophone2 className="text-[20px] text-[gray] hover:text-[#fff] self-center" />
-      <BiDevices className="text-[20px] text-[gray] hover:text-[#fff] self-center" />
-      <BsStack className="text-[20px] text-[gray] hover:text-[#fff] self-center" />
+      <TbMicrophone2
+        className="text-[20px] text-[gray] hover:text-[#fff] self-center"
+        title="Lyrics"
+      />
+      <BsStack
+        className="text-[20px] text-[gray] hover:text-[#fff] self-center"
+        title="Queue"
+      />
+      <BiDevices
+        className="text-[20px] text-[gray] hover:text-[#fff] self-center"
+        title="Devices"
+      />
       <div className="flex gap-1">
         {mute ? (
           <BsVolumeMute
             className="text-[25px] text-[gray] hover:text-[#fff] self-center"
             onClick={() => toggleVolume()}
+            title="Unmute"
           />
         ) : (
           <BsVolumeDown
             className="text-[25px] text-[gray] hover:text-[#fff]"
             onClick={() => toggleVolume(mute)}
+            title="Mute"
           />
         )}
         <div className="flex items-center">
