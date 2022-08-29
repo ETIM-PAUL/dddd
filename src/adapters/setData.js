@@ -1,4 +1,5 @@
 import axios from "axios";
+import { fetchCurrentlyPlaying } from "./getData";
 
 export const changeVolume = async (token, value) => {
   try {
@@ -50,6 +51,8 @@ export const skipTrack = async (type, token) => {
         },
       }
     );
+
+    fetchCurrentlyPlaying(token);
   } catch (error) {
     console.log(error);
   }

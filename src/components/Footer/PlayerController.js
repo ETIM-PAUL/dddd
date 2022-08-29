@@ -15,12 +15,13 @@ const SpotifyPlayerController = () => {
       dispatch({ type: "setPlayingState", payload: false });
     } else dispatch({ type: "setPlayingState", payload: true });
   };
-  const skipPlayingTrack = async (type) => {
-    skipTrack(type, token);
-    dispatch({ type: "setPlayingState", payload: true });
-    fetchCurrentlyPlaying(token).then((response) => {
-      dispatch({ type: "setPlayingTrack", payload: response });
+  const skipPlayingTrack = (type) => {
+    skipTrack(type, token).then(() => {
+      fetchCurrentlyPlaying(token).then((response) => {
+        dispatch({ type: "setPlayingTrack", payload: response });
+      });
     });
+    dispatch({ type: "setPlayingState", payload: true });
   };
   return (
     <div className="block">

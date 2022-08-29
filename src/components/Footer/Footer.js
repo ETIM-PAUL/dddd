@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   fetchCurrentlyPlaying,
@@ -11,6 +11,7 @@ import Volume from "./Volume";
 
 const Footer = () => {
   const { state, dispatch } = useSpotify();
+  const [showPlayer, setShowPlayer] = useState(false);
   const { token } = state;
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const Footer = () => {
     fetchCurrentlyPlaying(token).then((response) => {
       dispatch({ type: "setPlayingTrack", payload: response });
     });
+    setShowPlayer(true);
   }, [dispatch, token]);
 
   return (

@@ -16,10 +16,11 @@ const Volume = () => {
     setVolumeVal(playerVolume);
   }, [playerVolume]);
 
-  const toggleVolume = (mute) => {
+  const toggleVolume = () => {
     if (mute === false) {
       changeVolume(token, 0);
       setMute(true);
+      setVolumeVal(0);
       dispatch({ type: "setPlayerVolume", payload: 0 });
     } else {
       changeVolume(token, volumeVal);
@@ -60,7 +61,7 @@ const Volume = () => {
         ) : (
           <BsVolumeDown
             className="text-[25px] text-[gray] hover:text-[#fff]"
-            onClick={() => toggleVolume(mute)}
+            onClick={() => toggleVolume()}
             title="Mute"
           />
         )}

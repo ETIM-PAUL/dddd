@@ -94,13 +94,54 @@ export const fetchPlayerState = async (token) => {
         "Content-Type": "application/json",
       },
     });
+    if (response.data !== "") {
+      const playerState = {
+        isPlaying: response.data.is_playing,
+        volume: response.data.device.volume_percent,
+      };
 
-    const playerState = {
-      isPlaying: response.data.is_playing,
-      volume: response.data.device.volume_percent,
-    };
+      return playerState;
+    } else {
+      const playerState = {
+        isPlaying: false,
+        volume: 10,
+      };
 
-    return playerState;
+      return playerState;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  // return data;
+};
+export const fetchCategories = async (token) => {
+  try {
+    const response = await axios.get(
+      "https://api.spotify.com/v1/browse/categories",
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response);
+    // if (response.data !== "") {
+    //   const playerState = {
+    //     isPlaying: response.data.is_playing,
+    //     volume: response.data.device.volume_percent,
+    //   };
+
+    //   return playerState;
+    // } else {
+    //   const playerState = {
+    //     isPlaying: false,
+    //     volume: 10,
+    //   };
+
+    //   return playerState;
+    // }
   } catch (error) {
     console.log(error);
   }

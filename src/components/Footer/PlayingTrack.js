@@ -6,7 +6,7 @@ const PlayingTrack = () => {
   const { currentlyPlayingTrack } = state;
   const [playingTrack, setPlayingTrack] = useState({});
   useEffect(() => {
-    if (Object.values(currentlyPlayingTrack).length > 0) {
+    if (currentlyPlayingTrack) {
       setPlayingTrack(currentlyPlayingTrack);
     }
   }, [currentlyPlayingTrack]);
