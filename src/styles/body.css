@@ -11,16 +11,13 @@
 .category_box {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  row-gap: 1.2rem;
-  column-gap: 1.2rem;
-  ;
+  row-gap: 1.4rem;
+  column-gap: 1.4rem;
 }
 
 .transform {
   transform: rotate(25deg) translate(18%, -2%);
   right: 0;
-  height: 100px;
-  width: 100px;
   bottom: 0;
   -webkit-box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
   box-shadow: 0 2px 4px 0rgba(0, 0, 0, .2);

@@ -118,7 +118,7 @@ export const fetchPlayerState = async (token) => {
 export const fetchCategories = async (token) => {
   try {
     const response = await axios.get(
-      "https://api.spotify.com/v1/browse/categories?limit=40",
+      "https://api.spotify.com/v1/browse/categories?limit=50&offset=1",
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -129,6 +129,7 @@ export const fetchCategories = async (token) => {
     const data = response.data.categories.items?.map(({ name, id, icons }) => {
       return { name, id, icons };
     });
+    // console.log(response.data);
     return data;
   } catch (error) {
     console.log(error);

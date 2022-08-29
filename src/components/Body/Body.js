@@ -16,7 +16,7 @@ const Body = () => {
 
   return (
     <div
-      className=" h-[90vh] w-[100%] block overflow-scroll bg-blend  "
+      className=" h-[90vh] w-[100%] block overflow-y-scroll bg-blend  "
       ref={contentRef}
       onScroll={contentScroll}
     >
