@@ -35,7 +35,7 @@ const PlaylistDetails = ({ tableHeading }) => {
       fetchPlaylist(token, selectedPlaylist).then((response) => {
         dispatch({ type: "setPlaylistData", payload: response });
       });
-      setInterval(() => {
+      setTimeout(() => {
         setLoading(false);
       }, 2000);
     }
