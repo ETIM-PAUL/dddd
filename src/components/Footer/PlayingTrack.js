@@ -12,32 +12,30 @@ const PlayingTrack = () => {
   }, [currentlyPlayingTrack]);
 
   const { name, artistes, duration, image } = playingTrack;
+  const spaceArtistes = () => {
+    if (artistes?.length > 0) {
+      return artistes.join(", ");
+    } else return artistes;
+  };
 
   return (
-    <>
+    <div className="flex gap-4 items-center flex-1">
       {currentlyPlayingTrack && (
-        <div className="flex gap-4 items-center w-50">
+        <>
           <img alt="" src={image} />
           <div className="grid">
-            <p className="text-[#fff] hover:underline hover:cursor-pointer ">
+            <p className="text-[14px] text-[#fff] hover:underline hover:cursor-pointer ">
               {name}
             </p>
             <div className="flex gap-1">
-              {artistes?.map((artiste, id) => {
-                return (
-                  <p
-                    className="text-[#b3b3b3] text-xs hover:underline hover:cursor-pointer"
-                    key={id}
-                  >
-                    {artiste}
-                  </p>
-                );
-              })}
+              <p className="text-[#b3b3b3] text-[11px] hover:underline hover:cursor-pointer">
+                {spaceArtistes()}
+              </p>
             </div>
           </div>
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 };
 

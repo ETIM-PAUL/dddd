@@ -24,7 +24,7 @@ const SpotifyPlayerController = () => {
     dispatch({ type: "setPlayingState", payload: true });
   };
   return (
-    <div className="block">
+    <div className="flex flex-1 justify-center">
       <div className="flex gap-4 items-center">
         <BiShuffle className="text-[20px] text-[gray] hover:text-[#fff]" />
         <CgPlayTrackPrev

@@ -38,7 +38,7 @@ const Volume = () => {
   };
 
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-3 flex-1 justify-end">
       <TbMicrophone2
         className="text-[20px] text-[gray] hover:text-[#fff] self-center"
         title="Lyrics"
@@ -65,13 +65,12 @@ const Volume = () => {
             title="Mute"
           />
         )}
-        <div className="flex items-center">
+        <div className="flex items-center ">
           <input
             type="range"
             min={0}
             max={100}
             value={volumeVal || ""}
-            className="w-[6rem] h-[0.3rem]"
             onChange={(e) => setVolumeValue(e.target.value)}
           />
         </div>

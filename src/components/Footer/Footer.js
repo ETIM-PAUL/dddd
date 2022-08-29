@@ -26,14 +26,14 @@ const Footer = () => {
   }, [dispatch, token]);
 
   return (
-    <div className=" w-screen z-40 ">
+    <footer className=" w-screen z-40 ">
       <div className="w-auto h-[1px] bg-[#383636]"></div>
       <div className="bg-[#181818] border-[gray] w-auto h-[10vh] px-4 py-3 flex justify-between items-center">
         <PlayingTrack />
         <SpotifyPlayerController />
         <Volume />
       </div>
-    </div>
+    </footer>
   );
 };
 

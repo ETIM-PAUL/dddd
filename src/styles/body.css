@@ -34,3 +34,36 @@
   padding: 16px;
   /* position: absolute; */
 }
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  input[type='range'] {
+    border-radius: 8px;
+    height: 4px;
+    width: 80px;
+    outline: none;
+    -webkit-appearance: none;
+    background-color: gray;
+
+  }
+
+  .volume-range:hover input[type='range']::-webkit-slider-runnable-track {
+    display: flex
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    width: 12px;
+    -webkit-appearance: none;
+    height: 12px;
+    background-color: white;
+    -webkit-appearance: none;
+    border-radius: 50%;
+
+  }
+
+  input[type='range']::-webkit-slider-runnable-track {
+    height: 10px;
+    -webkit-appearance: none;
+    color: #13bba4;
+    margin-top: -1px;
+  }
+}
