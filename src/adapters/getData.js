@@ -118,7 +118,7 @@ export const fetchPlayerState = async (token) => {
 export const fetchCategories = async (token) => {
   try {
     const response = await axios.get(
-      "https://api.spotify.com/v1/browse/categories",
+      "https://api.spotify.com/v1/browse/categories?limit=40",
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -126,25 +126,11 @@ export const fetchCategories = async (token) => {
         },
       }
     );
-    console.log(response);
-    // if (response.data !== "") {
-    //   const playerState = {
-    //     isPlaying: response.data.is_playing,
-    //     volume: response.data.device.volume_percent,
-    //   };
-
-    //   return playerState;
-    // } else {
-    //   const playerState = {
-    //     isPlaying: false,
-    //     volume: 10,
-    //   };
-
-    //   return playerState;
-    // }
+    const data = response.data.categories.items?.map(({ name, id, icons }) => {
+      return { name, id, icons };
+    });
+    return data;
   } catch (error) {
     console.log(error);
   }
-
-  // return data;
 };

@@ -42,6 +42,12 @@ export function spotifyReducer(state, { type, payload }) {
         selectedPlaylistData: payload,
       };
     }
+    case "setCategories": {
+      return {
+        ...state,
+        categories: payload,
+      };
+    }
     default: {
       throw new Error(`Unhandled action type: ${type}`);
     }

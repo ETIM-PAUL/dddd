@@ -7,3 +7,30 @@
   background-color: #2f2f31 !important;
   box-shadow: 0 0.375rem 0.875rem rgb(0 0 0 / 10%);
 }
+
+.category_box {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  row-gap: 1.2rem;
+  column-gap: 1.2rem;
+  ;
+}
+
+.transform {
+  transform: rotate(25deg) translate(18%, -2%);
+  right: 0;
+  height: 100px;
+  width: 100px;
+  bottom: 0;
+  -webkit-box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+  box-shadow: 0 2px 4px 0rgba(0, 0, 0, .2);
+}
+
+.category__title {
+  letter-spacing: -.04em;
+  line-height: 1.3em;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  padding: 16px;
+  /* position: absolute; */
+}
