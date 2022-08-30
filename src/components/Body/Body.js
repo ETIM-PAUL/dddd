@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import Playlist from "../../pages/Playlist";
+import PlaylistDetails from "../../pages/Playlist";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../../pages/Home";
 import Header from "../HeaderNav/Header";
@@ -20,14 +20,15 @@ const Body = () => {
       ref={contentRef}
       onScroll={contentScroll}
     >
-      <Header headerBg={headerBg} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
           path="/playlist/:id"
-          element={<Playlist tableHeading={tableHeading} />}
+          element={
+            <PlaylistDetails tableHeading={tableHeading} headerBg={headerBg} />
+          }
         />
-        <Route path="/search" element={<SearchBody />} />
+        <Route path="/search" element={<SearchBody headerBg={headerBg} />} />
       </Routes>
     </div>
   );

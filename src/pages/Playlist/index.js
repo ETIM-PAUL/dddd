@@ -3,7 +3,6 @@ import { fetchPlaylist } from "../../adapters/getData";
 import { useSpotify } from "../../context/SpotifyContext";
 import "../../styles/body.css";
 import PlaylistTable from "../../components/Playlist/PlaylistTable";
-import loadingGif from "../../assets/22.gif";
 
 import {
   BsFillPlayCircleFill,
@@ -17,8 +16,9 @@ import {
 } from "react-icons/md";
 import { playerState } from "../../adapters/setData";
 import PlaylistHeading from "../../components/Playlist/PlaylistHeading";
+import Header from "../../components/HeaderNav/Header";
 
-const PlaylistDetails = ({ tableHeading }) => {
+const PlaylistDetails = ({ tableHeading, headerBg }) => {
   const { state, dispatch } = useSpotify();
   const [loading, setLoading] = useState(true);
   const { token, selectedPlaylist, playingState, selectedPlaylistData } = state;
@@ -43,14 +43,15 @@ const PlaylistDetails = ({ tableHeading }) => {
   return (
     <>
       {loading ? (
-        <img src={loadingGif} className="mx-auto mt-48" alt="loading-gif" />
+        ""
       ) : (
         <div>
           {Object.keys(selectedPlaylistData).length > 0 && (
             <>
+              <Header headerBg={headerBg} type="playlist" />
               <PlaylistHeading />
               <div className="pt-8 h-screen">
-                <div className=" flex justify-between mx-8">
+                <div className="flex justify-between mx-8">
                   <div className="flex items-center gap-6">
                     {selectedPlaylistData.tracks.length > 0 && (
                       <div className="flex items-center gap-6">

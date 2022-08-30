@@ -129,8 +129,99 @@ export const fetchCategories = async (token) => {
     const data = response.data.categories.items?.map(({ name, id, icons }) => {
       return { name, id, icons };
     });
-    // console.log(response.data);
     return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const searchQuery = async (token, value) => {
+  try {
+    const response = await axios.get(
+      `https://api.spotify.com/v1/search?q=${value}&type=album,artist,playlist,track,show,episode&include_external=audio&limit=15`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = response.data;
+    const album = data.albums.items.map(
+      ({ artists, id, images, name, release_date, type }) => {
+        return {
+          artists,
+          id,
+          images,
+          name,
+          release_date,
+        };
+      }
+    );
+    const artists = data.artists.items.map(
+      ({ id, images, name, popularity, type }) => {
+        return {
+          id,
+          images,
+          name,
+          popularity,
+          type,
+        };
+      }
+    );
+    const playlists = data.playlists.items.map(
+      ({ id, images, name, owner, type }) => {
+        return {
+          id,
+          images,
+          name,
+          owner,
+          type,
+        };
+      }
+    );
+    const episodes = data.episodes.items.map(
+      ({ id, images, name, description, release_date, duration_ms, type }) => {
+        return {
+          id,
+          images,
+          name,
+          description,
+          release_date,
+          duration_ms,
+          type,
+        };
+      }
+    );
+    const shows = data.shows.items.map(
+      ({ id, images, name, description, publisher, total_episodes, type }) => {
+        return {
+          id,
+          images,
+          name,
+          description,
+          publisher,
+          total_episodes,
+          type,
+        };
+      }
+    );
+    const tracks = data.tracks.items.map(
+      ({ id, images, name, popularity, duration_ms, artists, type }) => {
+        return {
+          id,
+          images,
+          name,
+          popularity,
+          duration_ms,
+          artists,
+          type,
+        };
+      }
+    );
+
+    console.log({ album, artists, playlists, episodes, shows, tracks });
+    console.log(response.data);
   } catch (error) {
     console.log(error);
   }

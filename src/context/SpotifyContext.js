@@ -12,6 +12,7 @@ const SpotifyProvider = ({ children }) => {
     currentlyPlayingTrack: null,
     playingState: {},
     categories: [],
+    searchValue: "",
   });
 
   const value = { state, dispatch };
