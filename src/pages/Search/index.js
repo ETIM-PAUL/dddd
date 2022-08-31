@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { fetchCategories } from "../../adapters/getData";
+import { fetchCategories, searchQuery } from "../../adapters/getData";
 import { useSpotify } from "../../context/SpotifyContext";
 import Category from "../../components/Search/categories";
 import Header from "../../components/HeaderNav/Header";
+import SearchResult from "../../components/Search/searchItem";
 
 const SearchBody = ({ headerBg }) => {
   const { state, dispatch } = useSpotify();
   const [loading, setLoading] = useState(true);
   const { token, categories, searchValue } = state;
+  const [showResult, setShowResult] = useState(false);
 
   useEffect(() => {
     fetchCategories(token).then((response) => {
@@ -16,7 +18,13 @@ const SearchBody = ({ headerBg }) => {
         setLoading(false);
       }, 1000);
     });
-  }, [dispatch, token]);
+    if (searchValue !== "") {
+      searchQuery(token, searchValue).then((response) => {
+        dispatch({ type: "setSearchResult", payload: response });
+        setShowResult(true);
+      });
+    }
+  }, [dispatch, searchValue, token]);
 
   return (
     <>
@@ -25,8 +33,8 @@ const SearchBody = ({ headerBg }) => {
       ) : (
         <>
           <Header headerBg={headerBg} type="search" />
-          {searchValue.length > 0 ? (
-            <div></div>
+          {searchValue !== "" && showResult ? (
+            <SearchResult showResult={showResult} />
           ) : (
             <div className="pt-8 h-screen px-8">
               <div className="text-[#fff] block font-sans items-center">

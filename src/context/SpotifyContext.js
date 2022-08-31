@@ -13,6 +13,7 @@ const SpotifyProvider = ({ children }) => {
     playingState: {},
     categories: [],
     searchValue: "",
+    searchResult: {},
   });
 
   const value = { state, dispatch };

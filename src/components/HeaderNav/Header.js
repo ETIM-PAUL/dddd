@@ -7,13 +7,10 @@ import {
   MdArrowDropDown,
   MdArrowDropUp,
 } from "react-icons/md";
-import { searchQuery } from "../../adapters/getData";
 
 const Header = ({ headerBg, type }) => {
-  const { state, dispatch } = useSpotify();
+  const { dispatch } = useSpotify();
   const [searchInput, setSearchInput] = useState("");
-
-  const { token } = state;
 
   const [showDropDown, setShowDropDown] = useState(false);
   const bgColor =
@@ -24,7 +21,6 @@ const Header = ({ headerBg, type }) => {
     setShowDropDown(!showDropDown);
   };
   const handleSearch = (value) => {
-    searchQuery(token, value);
     setSearchInput(value);
     dispatch({ type: "setSearchValue", payload: value });
   };

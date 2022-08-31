@@ -207,10 +207,10 @@ export const searchQuery = async (token, value) => {
       }
     );
     const tracks = data.tracks.items.map(
-      ({ id, images, name, popularity, duration_ms, artists, type }) => {
+      ({ id, album, name, popularity, duration_ms, artists, type }) => {
         return {
           id,
-          images,
+          album,
           name,
           popularity,
           duration_ms,
@@ -220,8 +220,9 @@ export const searchQuery = async (token, value) => {
       }
     );
 
-    console.log({ album, artists, playlists, episodes, shows, tracks });
-    console.log(response.data);
+    const searchResult = { album, artists, playlists, episodes, shows, tracks };
+    // console.log(searchResult);
+    return searchResult;
   } catch (error) {
     console.log(error);
   }

@@ -40,3 +40,9 @@ export const colors = [
   "#f037a5",
   "#777777",
 ];
+
+export const notPlaying =
+  "text-[#fff] text-[15px] normal-case font-medium font-sans";
+
+export const playing =
+  "text-[#1ad760] text-[15px] normal-case font-medium font-sans";

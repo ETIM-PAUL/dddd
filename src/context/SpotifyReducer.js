@@ -54,6 +54,12 @@ export function spotifyReducer(state, { type, payload }) {
         searchValue: payload,
       };
     }
+    case "setSearchResult": {
+      return {
+        ...state,
+        searchResult: payload,
+      };
+    }
     default: {
       throw new Error(`Unhandled action type: ${type}`);
     }

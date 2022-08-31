@@ -72,7 +72,7 @@ const PlaylistDetails = ({ tableHeading, headerBg }) => {
                     <MdOutlinePersonAdd className="text-[#b3b3b3] text-[35px]" />
                     <BsThreeDots className="text-[#b3b3b3] text-[35px]" />
                   </div>
-                  {selectedPlaylistData.tracks.length > 0 && (
+                  {selectedPlaylistData?.tracks.length > 0 && (
                     <div className="text-[#b3b3b3] text-[15px] flex items-center gap-5">
                       <div className="text-[20px] hover:rounded-[50%] hover:bg-[#333] w-[30px] h-[30px] flex items-center justify-center hover:text-[#fff]">
                         <BiSearch className="" />

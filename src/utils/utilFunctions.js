@@ -29,3 +29,28 @@ export const durationToMinsAndSecs = (duration) => {
   const seconds = ((duration % 60000) / 1000).toFixed(0);
   return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 };
+
+export const spaceArtistes = (artistes, type) => {
+  if (artistes?.length > 0) {
+    if (type === "search") {
+      return artistes.map((artiste) => artiste.name).join(", ");
+    }
+    return artistes.join(", ");
+  } else return artistes;
+};
+
+export const mostPopularItemData = {
+  image: "",
+  name: "",
+  artists: "",
+};
+
+export const mostPopularItem = (searchResult) => {
+  searchResult.tracks.sort((a, b) =>
+    a.popularity < b.popularity ? 1 : a.popularity > b.popularity ? -1 : 0
+  );
+  const mostPopularItem = searchResult.tracks.slice(0, 1);
+  mostPopularItemData.image = mostPopularItem[0].album.images[1].url;
+  mostPopularItemData.name = mostPopularItem[0].name;
+  mostPopularItemData.artists = mostPopularItem[0].artists;
+};

@@ -1,19 +1,15 @@
 import React from "react";
 import { useSpotify } from "../../context/SpotifyContext";
 import { BsClock } from "react-icons/bs";
-import { MdExplicit } from "react-icons/md";
 import {
   durationToMinsAndSecs,
   getMonthDayYear,
 } from "../../utils/utilFunctions";
+import TrackInfo from "./TrackInfo";
 
 const PlaylistTable = ({ tableHeading }) => {
   const { state } = useSpotify();
-  const notPlaying =
-    "text-[#fff] text-[15px] normal-case font-medium font-sans";
-  const playing =
-    "text-[#1ad760] text-[15px] normal-case font-medium font-sans";
-  const { selectedPlaylistData, currentlyPlayingTrack } = state;
+  const { selectedPlaylistData } = state;
   return (
     <div className="mt-4 w-[100%]  pb-8">
       {/* Playlist Table Headings */}
@@ -49,37 +45,14 @@ const PlaylistTable = ({ tableHeading }) => {
               className="grid grid-cols-tableGridBody text-[gray] uppercase text-[13px] font-sans px-[3.5rem] hover:bg-[#2b2b2b] hover:rounded-md z-20"
               key={id}
             >
-              <div className="gap-4 flex items-center">
-                <span className="text-[#fff] py-1">{index + 1}</span>
-                <div className="hover:text-[#fff] cursor-default flex gap-4 items-center">
-                  <img
-                    src={image.url}
-                    alt="track"
-                    width={45}
-                    height={55}
-                    className="my-2"
-                  />
-                  <div className="grid">
-                    <span
-                      className={
-                        currentlyPlayingTrack.name === name
-                          ? playing
-                          : notPlaying
-                      }
-                    >
-                      {name}
-                    </span>
-                    <div className="flex items-center gap-1">
-                      {isExplicit ? (
-                        <MdExplicit className="text-[18px]" />
-                      ) : null}
-                      <span className="text-[gray] text-[13px] capitalize font-medium font-sans">
-                        {artist.join(", ")}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <TrackInfo
+                index={index}
+                image={image}
+                name={name}
+                artist={artist}
+                isExplicit={isExplicit}
+                type="playlist"
+              />
               <span className="text-[#b3b3b3] py-1 text-[13px] capitalize self-center font-normal">
                 {album}
               </span>
