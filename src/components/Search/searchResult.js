@@ -1,11 +1,10 @@
-import React, { useEffect, useState, Suspense, lazy } from "react";
+import React from "react";
 import { useSpotify } from "../../context/SpotifyContext";
 import {
   durationToMinsAndSecs,
   mostPopularItems,
   mostPopularItemData,
   mostPopularItem,
-  // mostPopularTracks,
   spaceArtistes,
 } from "../../utils/utilFunctions";
 import TrackInfo from "../Playlist/TrackInfo";
@@ -36,7 +35,7 @@ const SearchResult = ({ showResult }) => {
           <div className="flex gap-3">
             <SearchFilter title="all" />
             <SearchFilter title="artists" />
-            <SearchFilter title="podcasts & shows" />
+            <SearchFilter title="podcasts &amp; shows" />
             <SearchFilter title="songs" />
             <SearchFilter title="playlists" />
             <SearchFilter title="albums" />
@@ -75,7 +74,6 @@ const SearchResult = ({ showResult }) => {
                         className="flex justify-between px-[0.7rem] items-center hover:bg-[#2b2b2b] hover:rounded-md"
                         key={id}
                       >
-                        <Suspense fallback={<h1>Still Loading…</h1>}></Suspense>
                         <TrackInfo
                           id={id}
                           name={name}

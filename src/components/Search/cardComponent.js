@@ -14,7 +14,7 @@ const CardComponent = ({ ...props }) => {
               backgroundImage: `url(${props.image[0]?.url})`,
             }}
           >
-            <BsFillPlayCircleFill className="text-[#1ad760] text-[55px] hover:p-[1px] absolute bottom-28 ml-[6rem] group-hover:block hidden  hover:animate-bounce" />
+            <BsFillPlayCircleFill className="text-[#1ad760] text-[55px] hover:p-[1px]  absolute bottom-28 ml-[6rem] group-hover:block hidden" />
           </div>
         </div>
 

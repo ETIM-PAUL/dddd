@@ -12,7 +12,7 @@ const SearchItemCategory = ({ title }) => {
     <div>
       <section className="my-4">
         <p className="font-bold text-[25px] capitalize">{title}</p>
-        <div className="py-2 flex column-4 gap-4 relative bg-transparent rounded-lg overflow-hidden">
+        <div className="py-2 flex column-auto  gap-4 relative bg-transparent rounded-lg overflow-hidden">
           {mostPopularItems(searchResult[title]).map(
             ({ id, name, images, type }) => {
               return (

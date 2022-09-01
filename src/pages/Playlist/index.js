@@ -57,7 +57,7 @@ const PlaylistDetails = ({ tableHeading, headerBg }) => {
                       <div className="flex items-center gap-6">
                         {!playingState ? (
                           <BsFillPlayCircleFill
-                            className="text-[#1ad760] text-[55px] hover:p-[1px] absolute"
+                            className="text-[#1ad760] text-[55px] hover:p-[1px]"
                             onClick={() => setPlayerState("play")}
                           />
                         ) : (
