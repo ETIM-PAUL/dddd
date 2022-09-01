@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 const Playlists = () => {
   const { state, dispatch } = useSpotify();
 
+  const { playlists } = state;
+
   useEffect(() => {
     fetchPlaylists(state.token).then((response) =>
       dispatch({ type: "setPlaylists", payload: response })
@@ -15,7 +17,7 @@ const Playlists = () => {
   return (
     <div className="text-[gray]  mt-3">
       <ul>
-        {state?.playlists.map(({ name, id }) => {
+        {playlists.map(({ name, id }) => {
           return (
             <Link to={`/playlist/${id}`} key={id}>
               <li

@@ -42,7 +42,7 @@ export const colors = [
 ];
 
 export const notPlaying =
-  "text-[#fff] text-[15px] normal-case font-medium font-sans";
+  "text-white text-[15px] normal-case font-medium font-sans";
 
 export const playing =
   "text-[#1ad760] text-[15px] normal-case font-medium font-sans";

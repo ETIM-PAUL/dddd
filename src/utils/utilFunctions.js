@@ -54,3 +54,20 @@ export const mostPopularItem = (searchResult) => {
   mostPopularItemData.name = mostPopularItem[0].name;
   mostPopularItemData.artists = mostPopularItem[0].artists;
 };
+
+export const mostPopularItems = (type) => {
+  type.sort((a, b) =>
+    a.popularity < b.popularity ? 1 : a.popularity > b.popularity ? -1 : 0
+  );
+
+  const itemsToDisplay = type.slice(0, 7);
+  return itemsToDisplay;
+};
+// export const mostPopularArtists = (searchResult) => {
+//   searchResult.artists.sort((a, b) =>
+//     a.popularity < b.popularity ? 1 : a.popularity > b.popularity ? -1 : 0
+//   );
+
+//   const artistsToDisplay = searchResult.artists.slice(0, 4);
+//   return artistsToDisplay;
+// };

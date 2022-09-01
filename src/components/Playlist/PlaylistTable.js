@@ -46,6 +46,7 @@ const PlaylistTable = ({ tableHeading }) => {
               key={id}
             >
               <TrackInfo
+                id={id}
                 index={index}
                 image={image}
                 name={name}

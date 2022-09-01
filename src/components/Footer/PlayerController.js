@@ -14,6 +14,9 @@ const SpotifyPlayerController = () => {
     if (type === "pause") {
       dispatch({ type: "setPlayingState", payload: false });
     } else dispatch({ type: "setPlayingState", payload: true });
+    fetchCurrentlyPlaying(token).then((response) => {
+      dispatch({ type: "setPlayingTrack", payload: response });
+    });
   };
   const skipPlayingTrack = (type) => {
     skipTrack(type, token).then(() => {

@@ -3,7 +3,7 @@ import { fetchCategories, searchQuery } from "../../adapters/getData";
 import { useSpotify } from "../../context/SpotifyContext";
 import Category from "../../components/Search/categories";
 import Header from "../../components/HeaderNav/Header";
-import SearchResult from "../../components/Search/searchItem";
+import SearchResult from "../../components/Search/searchResult";
 
 const SearchBody = ({ headerBg }) => {
   const { state, dispatch } = useSpotify();
@@ -28,9 +28,7 @@ const SearchBody = ({ headerBg }) => {
 
   return (
     <>
-      {loading ? (
-        ""
-      ) : (
+      {loading ? null : (
         <>
           <Header headerBg={headerBg} type="search" />
           {searchValue !== "" && showResult ? (

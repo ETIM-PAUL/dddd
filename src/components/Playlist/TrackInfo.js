@@ -25,7 +25,7 @@ const TrackInfo = ({ ...props }) => {
         <div className="grid">
           <span
             className={
-              currentlyPlayingTrack?.name === props.name ? playing : notPlaying
+              currentlyPlayingTrack?.id === props.id ? playing : notPlaying
             }
           >
             {props.name}
