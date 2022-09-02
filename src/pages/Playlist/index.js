@@ -3,12 +3,10 @@ import { fetchPlaylist } from "../../adapters/getData";
 import { useSpotify } from "../../context/SpotifyContext";
 import "../../styles/body.css";
 import PlaylistTable from "../../components/Playlist/PlaylistTable";
+import { ImPlay3 } from "react-icons/im";
+import { IoIosPause } from "react-icons/io";
 
-import {
-  BsFillPlayCircleFill,
-  BsThreeDots,
-  BsFillPauseCircleFill,
-} from "react-icons/bs";
+import { BsThreeDots } from "react-icons/bs";
 import { BiDownArrow, BiSearch } from "react-icons/bi";
 import {
   MdOutlineDownloadForOffline,
@@ -56,15 +54,23 @@ const PlaylistDetails = ({ tableHeading, headerBg }) => {
                     {selectedPlaylistData.tracks.length > 0 && (
                       <div className="flex items-center gap-6">
                         {!playingState ? (
-                          <BsFillPlayCircleFill
-                            className="text-[#1ad760] text-[55px] hover:p-[1px]"
-                            onClick={() => setPlayerState("play")}
-                          />
+                          <div className="w-[55px] h-[55px]">
+                            <div className="w-[48px] h-[48px] rounded-[50%] bg-[#1ad760] flex items-center justify-center hover:w-[50px] hover:h-[50px]">
+                              <ImPlay3
+                                className="text-black text-[25px] ml-px"
+                                onClick={() => setPlayerState("play")}
+                              />
+                            </div>
+                          </div>
                         ) : (
-                          <BsFillPauseCircleFill
-                            className="text-[#1ad760] text-[55px] hover:p-[1px]"
-                            onClick={() => setPlayerState("pause")}
-                          />
+                          <div className="w-[55px] h-[55px]">
+                            <div className="w-[48px] h-[48px] rounded-[50%] bg-[#1ad760] flex items-center justify-center hover:w-[50px] hover:h-[50px]">
+                              <IoIosPause
+                                className=" text-[25px] ml-px "
+                                onClick={() => setPlayerState("pause")}
+                              />
+                            </div>
+                          </div>
                         )}
                         <MdOutlineDownloadForOffline className="text-[#b3b3b3] text-[35px]" />
                       </div>

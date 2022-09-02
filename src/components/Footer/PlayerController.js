@@ -2,7 +2,8 @@ import React from "react";
 import { BiShuffle, BiRepeat } from "react-icons/bi";
 import { CgPlayTrackNext, CgPlayTrackPrev } from "react-icons/cg";
 import { playerState, skipTrack } from "../../adapters/setData";
-import { BsFillPlayCircleFill, BsFillPauseCircleFill } from "react-icons/bs";
+import { ImPlay3 } from "react-icons/im";
+import { IoIosPause } from "react-icons/io";
 import { useSpotify } from "../../context/SpotifyContext";
 import { fetchCurrentlyPlaying } from "../../adapters/getData";
 
@@ -35,15 +36,25 @@ const SpotifyPlayerController = () => {
           onClick={() => skipPlayingTrack("previous")}
         />
         {!playingState ? (
-          <BsFillPlayCircleFill
-            className="text-[45px] text-[#fff]"
+          <div
+            className="w-[45px] h-[45px] rounded-[50%] bg-white flex  items-center justify-center "
             onClick={() => playerPlayingState("play")}
-          />
+          >
+            <ImPlay3 className="text-black text-[25px] ml-[4px]" />
+          </div>
         ) : (
-          <BsFillPauseCircleFill
-            className="text-[45px] text-[#fff]"
+          // <BsFillPlayCircleFill
+          //   className="text-[45px] text-[#fff]"
+          // />
+          <div
+            className="w-[45px] h-[45px] rounded-[50%] bg-white flex  items-center justify-center "
             onClick={() => playerPlayingState("pause")}
-          />
+          >
+            <IoIosPause className="text-black text-[25px] ml-px" />
+          </div>
+          // <BsFillPauseCircleFill
+          //   className="text-[45px] text-[#fff]"
+          // />
         )}
         <CgPlayTrackNext
           className="text-[35px] text-[gray] hover:text-[#fff]"

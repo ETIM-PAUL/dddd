@@ -1,5 +1,5 @@
 import React from "react";
-import { BsFillPlayCircleFill } from "react-icons/bs";
+import { ImPlay3 } from "react-icons/im";
 
 const CardComponent = ({ ...props }) => {
   const roundedImages = "rounded-[50%] w-40 h-40 bg-contain";
@@ -14,7 +14,9 @@ const CardComponent = ({ ...props }) => {
               backgroundImage: `url(${props.image[0]?.url})`,
             }}
           >
-            <BsFillPlayCircleFill className="text-[#1ad760] text-[55px] hover:p-[1px]  absolute bottom-28 ml-[6rem] group-hover:block hidden" />
+            <div className="w-[45px] h-[45px] rounded-[50%] bg-[#1ad760] hidden  absolute bottom-28 ml-[6.5rem] group-hover:flex  items-center justify-center hover:w-[47px] hover:h-[47px] ">
+              <ImPlay3 className="text-black text-[25px] ml-[4px] " />
+            </div>
           </div>
         </div>
 

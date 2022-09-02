@@ -8,7 +8,8 @@ import {
   spaceArtistes,
 } from "../../utils/utilFunctions";
 import TrackInfo from "../Playlist/TrackInfo";
-import { BsFillPlayCircleFill, BsFillPauseCircleFill } from "react-icons/bs";
+import { ImPlay3 } from "react-icons/im";
+import { IoIosPause } from "react-icons/io";
 import SearchItemCategory from "./searchItemsCategory";
 
 const SearchFilter = ({ title }) => {
@@ -43,7 +44,7 @@ const SearchResult = ({ showResult }) => {
           <div className="my-4 block md:flex md:w-[100%] md:mx-auto justify-between gap-6  font-sans">
             <section className="md:w-[40%] 2xl:w-[30%]">
               <p className="font-bold text-[25px]">Top result</p>
-              <div className="my-2 block relative bg-[#181818] rounded-lg  h-[245px] hover:bg-[#222222]">
+              <div className="my-2 block relative bg-[#181818] rounded-lg  h-[245px] hover:bg-[#222222] group">
                 <div className="p-4 block">
                   <img
                     src={mostPopularItemData.image}
@@ -59,7 +60,10 @@ const SearchResult = ({ showResult }) => {
                       {spaceArtistes(mostPopularItemData.artists, "search")}
                     </span>
                   </div>
-                  <BsFillPlayCircleFill className="text-[#1ad760] text-[55px] hover: absolute bottom-6 right-5 hover:p-[1px]" />
+                  <div className="w-[45px] h-[45px] rounded-[50%] bg-[#1ad760] hidden  absolute bottom-8 right-5 group-hover:flex  items-center justify-center hover:w-[47px] hover:h-[47px]">
+                    <ImPlay3 className="text-black text-[25px] ml-[4px]" />
+                  </div>
+                  {/* <ImPlay3 className="text-[#1ad760] text-[55px] hover: absolute bottom-6 right-5 hover:p-[1px]" /> */}
                 </div>
               </div>
             </section>
