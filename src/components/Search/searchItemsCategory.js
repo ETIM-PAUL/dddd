@@ -7,7 +7,6 @@ const SearchItemCategory = ({ title }) => {
 
   const { searchResult } = state;
   console.log("search result", searchResult);
-  // console.log("title", title);
   return (
     <div>
       <section className="my-4">

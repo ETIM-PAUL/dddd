@@ -14,9 +14,11 @@ const CardComponent = ({ ...props }) => {
               backgroundImage: `url(${props.image[0]?.url})`,
             }}
           >
-            <div className="w-[45px] h-[45px] rounded-[50%] bg-[#1ad760] hidden  absolute bottom-28 ml-[6.5rem] group-hover:flex  items-center justify-center hover:w-[47px] hover:h-[47px] ">
-              <ImPlay3 className="text-black text-[25px] ml-[4px] " />
-            </div>
+            {props.type === "shows" || props.type === "episodes" ? null : (
+              <div className="w-[45px] h-[45px] rounded-[50%] bg-[#1ad760] hidden  absolute bottom-28 ml-[6.5rem] group-hover:flex  items-center justify-center hover:w-[47px] hover:h-[47px] ">
+                <ImPlay3 className="text-black text-[25px] ml-[4px] " />
+              </div>
+            )}
           </div>
         </div>
 
