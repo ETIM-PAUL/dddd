@@ -76,7 +76,7 @@ export const fetchCurrentlyPlaying = async (token) => {
         name: item.name,
         artistes: item.artists.map((artiste) => artiste.name),
         duration: item.duration_ms,
-        image: item.album.images[2].url,
+        image: item.album.images[0].url,
       };
       return currentlyPlaying;
     } else return null;
@@ -155,6 +155,7 @@ export const searchQuery = async (token, value) => {
           images,
           name,
           release_date,
+          type,
         };
       }
     );

@@ -43,16 +43,18 @@ export const mostPopularItemData = {
   image: "",
   name: "",
   artists: "",
+  type: "",
 };
 
 export const mostPopularItem = (searchResult) => {
-  searchResult.tracks.sort((a, b) =>
+  const mostPopularItem = searchResult.tracks.sort((a, b) =>
     a.popularity < b.popularity ? 1 : a.popularity > b.popularity ? -1 : 0
   );
-  const mostPopularItem = searchResult.tracks.slice(0, 1);
+  // const mostPopularItem = searchResult.tracks.slice(0, 1);
   mostPopularItemData.image = mostPopularItem[0].album.images[1].url;
   mostPopularItemData.name = mostPopularItem[0].name;
   mostPopularItemData.artists = mostPopularItem[0].artists;
+  mostPopularItemData.type = mostPopularItem[0].type;
 };
 
 export const mostPopularItems = (type) => {
@@ -60,7 +62,7 @@ export const mostPopularItems = (type) => {
     a.popularity < b.popularity ? 1 : a.popularity > b.popularity ? -1 : 0
   );
 
-  const itemsToDisplay = type.slice(0, 7);
+  const itemsToDisplay = type.slice(0, 10);
   return itemsToDisplay;
 };
 // export const mostPopularArtists = (searchResult) => {

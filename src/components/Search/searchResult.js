@@ -56,12 +56,14 @@ const SearchResult = ({ showResult }) => {
                     <strong className="text-[20px] md:text-[30px] font-bold truncate">
                       {mostPopularItemData.name}
                     </strong>
-                    <span className="my-2 text-[gray] text-[13px] capitalize font-medium ">
-                      {spaceArtistes(mostPopularItemData.artists, "search")}
-                    </span>
+                    <div className="my-2 bg-black w-fit rounded-[20px] flex justify-content items-center font-sans">
+                      <span className="p-2 text-[#ddd] text-[12px] capitalize font-bold ">
+                        {mostPopularItemData.type.toUpperCase()}
+                      </span>
+                    </div>
                   </div>
                   <div className="w-[45px] h-[45px] rounded-[50%] bg-[#1ad760] hidden  absolute bottom-8 right-5 group-hover:flex  items-center justify-center hover:w-[47px] hover:h-[47px]">
-                    <ImPlay3 className="text-black text-[25px] ml-[4px]" />
+                    <ImPlay3 className="text-black text-[25px] ml-px" />
                   </div>
                   {/* <ImPlay3 className="text-[#1ad760] text-[55px] hover: absolute bottom-6 right-5 hover:p-[1px]" /> */}
                 </div>

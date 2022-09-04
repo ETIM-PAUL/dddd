@@ -18,7 +18,7 @@ const PlayingTrack = () => {
     <div className="flex gap-4 items-center flex-1">
       {currentlyPlayingTrack && (
         <>
-          <img alt="" src={image} />
+          <img alt="" src={image} className="w-14 h-14 bg-contain" />
           <div className="grid">
             <p className="text-[14px] text-[#fff] hover:underline hover:cursor-pointer ">
               {name}

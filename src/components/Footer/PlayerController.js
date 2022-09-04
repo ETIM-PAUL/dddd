@@ -37,24 +37,18 @@ const SpotifyPlayerController = () => {
         />
         {!playingState ? (
           <div
-            className="w-[45px] h-[45px] rounded-[50%] bg-white flex  items-center justify-center "
+            className="w-[35px] h-[35px] rounded-[50%] bg-white flex  items-center justify-center "
             onClick={() => playerPlayingState("play")}
           >
-            <ImPlay3 className="text-black text-[25px] ml-[4px]" />
+            <ImPlay3 className="text-black text-[20px] ml-[4px]" />
           </div>
         ) : (
-          // <BsFillPlayCircleFill
-          //   className="text-[45px] text-[#fff]"
-          // />
           <div
-            className="w-[45px] h-[45px] rounded-[50%] bg-white flex  items-center justify-center "
+            className="w-[35px] h-[35px] rounded-[50%] bg-white flex  items-center justify-center "
             onClick={() => playerPlayingState("pause")}
           >
             <IoIosPause className="text-black text-[25px] ml-px" />
           </div>
-          // <BsFillPauseCircleFill
-          //   className="text-[45px] text-[#fff]"
-          // />
         )}
         <CgPlayTrackNext
           className="text-[35px] text-[gray] hover:text-[#fff]"

@@ -6,12 +6,19 @@ const SearchItemCategory = ({ title }) => {
   const { state } = useSpotify();
 
   const { searchResult } = state;
-  console.log("search result", searchResult);
   return (
     <div>
       <section className="my-4">
         <p className="font-bold text-[25px] capitalize">{title}</p>
-        <div className="py-2 flex column-auto  gap-4 relative bg-transparent rounded-lg overflow-hidden">
+        <div
+          className="py-2 grid  auto-rows-[0] relative bg-transparent rounded-lg overflow-hidden columns-3xs"
+          style={{
+            gridTemplateColumns: `repeat(auto-fit,minmax(200px, 1fr))`,
+            gridTemplateRows: "100%",
+            columnGap: 20,
+            columns: "",
+          }}
+        >
           {mostPopularItems(searchResult[title]).map(
             ({ id, name, images, type }) => {
               return (
@@ -19,7 +26,7 @@ const SearchItemCategory = ({ title }) => {
                   key={id}
                   id={id}
                   name={name}
-                  type={title}
+                  type={type}
                   image={images}
                 />
               );
