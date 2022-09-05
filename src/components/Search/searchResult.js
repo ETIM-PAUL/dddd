@@ -11,6 +11,11 @@ import TrackInfo from "../Playlist/TrackInfo";
 import { ImPlay3 } from "react-icons/im";
 import { IoIosPause } from "react-icons/io";
 import SearchItemCategory from "./searchItemsCategory";
+import {
+  fetchCurrentlyPlaying,
+  fetchPlayerState,
+} from "../../adapters/getData";
+import { playerState } from "../../adapters/setData";
 
 const SearchFilter = ({ title }) => {
   return (
@@ -23,9 +28,15 @@ const SearchFilter = ({ title }) => {
 };
 
 const SearchResult = ({ showResult }) => {
-  const { state } = useSpotify();
-
-  const { searchResult } = state;
+  const { state, dispatch } = useSpotify();
+  const { searchResult, token } = state;
+  const playCollection = (uri) => {
+    playerState("play", token, uri).then(() => {
+      fetchCurrentlyPlaying(token).then((response) => {
+        dispatch({ type: "setPlayingTrack", payload: response });
+      });
+    });
+  };
 
   mostPopularItem(searchResult);
 
@@ -63,7 +74,10 @@ const SearchResult = ({ showResult }) => {
                     </div>
                   </div>
                   <div className="w-[45px] h-[45px] rounded-[50%] bg-[#1ad760] hidden  absolute bottom-8 right-5 group-hover:flex  items-center justify-center hover:w-[47px] hover:h-[47px]">
-                    <ImPlay3 className="text-black text-[25px] ml-px" />
+                    <ImPlay3
+                      className="text-black text-[25px] ml-px"
+                      onClick={() => playCollection(mostPopularItemData.uri)}
+                    />
                   </div>
                   {/* <ImPlay3 className="text-[#1ad760] text-[55px] hover: absolute bottom-6 right-5 hover:p-[1px]" /> */}
                 </div>

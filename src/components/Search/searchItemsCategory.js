@@ -20,7 +20,7 @@ const SearchItemCategory = ({ title }) => {
           }}
         >
           {mostPopularItems(searchResult[title]).map(
-            ({ id, name, images, type }) => {
+            ({ id, name, images, type, uri }) => {
               return (
                 <CardComponent
                   key={id}
@@ -28,6 +28,7 @@ const SearchItemCategory = ({ title }) => {
                   name={name}
                   type={type}
                   image={images}
+                  uri={uri}
                 />
               );
             }

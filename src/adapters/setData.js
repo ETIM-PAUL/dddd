@@ -21,11 +21,14 @@ export const changeVolume = async (token, value) => {
   }
 };
 
-export const playerState = async (type, token) => {
+export const playerState = async (type, token, context_uri, track_number) => {
   try {
     await axios.put(
       `https://api.spotify.com/v1/me/player/${type}`,
-      {},
+      {
+        context_uri,
+        position_ms: 0,
+      },
       {
         position_ms: 0,
         headers: {
@@ -34,6 +37,7 @@ export const playerState = async (type, token) => {
         },
       }
     );
+    fetchCurrentlyPlaying(token);
   } catch (error) {
     console.log(error);
   }

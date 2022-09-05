@@ -44,17 +44,18 @@ export const mostPopularItemData = {
   name: "",
   artists: "",
   type: "",
+  uri: "",
 };
 
 export const mostPopularItem = (searchResult) => {
   const mostPopularItem = searchResult.tracks.sort((a, b) =>
     a.popularity < b.popularity ? 1 : a.popularity > b.popularity ? -1 : 0
   );
-  // const mostPopularItem = searchResult.tracks.slice(0, 1);
   mostPopularItemData.image = mostPopularItem[0].album.images[1].url;
   mostPopularItemData.name = mostPopularItem[0].name;
   mostPopularItemData.artists = mostPopularItem[0].artists;
   mostPopularItemData.type = mostPopularItem[0].type;
+  mostPopularItemData.uri = mostPopularItem[0].uri;
 };
 
 export const mostPopularItems = (type) => {
