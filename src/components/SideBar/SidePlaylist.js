@@ -21,7 +21,10 @@ const SideBarPlaylists = () => {
           return (
             <Link to={`/playlist/${id}`} key={id}>
               <li
-                onClick={() => dispatch({ type: "setPlaylist", payload: id })}
+                onClick={() => {
+                  dispatch({ type: "setPlaylist", payload: id });
+                  dispatch({ type: "setCategory", payload: null });
+                }}
                 className="text-[14px] hover:text-[#fff] hover:cursor-default py-2 font-medium font-sans truncate"
               >
                 {name}

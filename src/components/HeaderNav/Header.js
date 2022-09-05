@@ -9,7 +9,8 @@ import {
 } from "react-icons/md";
 
 const Header = ({ headerBg, type }) => {
-  const { dispatch } = useSpotify();
+  const { state, dispatch } = useSpotify();
+  const { selectedCategory, selectedPlaylistData } = state;
   const [searchInput, setSearchInput] = useState("");
 
   const [showDropDown, setShowDropDown] = useState(false);
@@ -46,6 +47,20 @@ const Header = ({ headerBg, type }) => {
                 />
               </div>
             )}
+            {selectedCategory && selectedCategory.name !== null && headerBg ? (
+              <div className="flex items-center justify-center shrink-1 text-white font-sans">
+                <p className="text-[30px] font-bold">{selectedCategory.name}</p>
+              </div>
+            ) : null}
+            {selectedPlaylistData &&
+            selectedPlaylistData.name !== null &&
+            headerBg ? (
+              <div className="flex items-center justify-center shrink-1 text-white font-sans">
+                <p className="text-[30px] font-bold">
+                  {selectedPlaylistData.name}
+                </p>
+              </div>
+            ) : null}
           </div>
           <div
             className="h-8 bg-[black] hover:bg-[#2f2f31] hover:cursor-pointer w-fit rounded-[25px] flex gap-1 items-center text-white"

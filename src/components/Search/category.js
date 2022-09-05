@@ -9,13 +9,15 @@ const CategoryItems = () => {
   const { token, selectedCategory } = state;
 
   useEffect(() => {
-    fetchCategoryItem(token, selectedCategory.id).then((response) => {
-      setItems(response);
-    });
+    if (selectedCategory !== null) {
+      fetchCategoryItem(token, selectedCategory.id).then((response) => {
+        setItems(response);
+      });
+    }
   }, [selectedCategory, token]);
   return (
     <>
-      {items.length > 0 && (
+      {selectedCategory && items.length > 0 && (
         <div className=" font-sans font-black pb-8">
           <span className="text-white text-[90px]">
             {selectedCategory.name}

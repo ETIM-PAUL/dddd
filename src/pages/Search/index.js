@@ -9,7 +9,7 @@ import CategoryItems from "../../components/Search/category";
 const SearchBody = ({ headerBg }) => {
   const { state, dispatch } = useSpotify();
   const [loading, setLoading] = useState(true);
-  const { token, categories, searchValue } = state;
+  const { token, categories, searchValue, selectedCategory } = state;
   const [showResult, setShowResult] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
 
@@ -20,12 +20,12 @@ const SearchBody = ({ headerBg }) => {
         setLoading(false);
       }, 1000);
     });
-    if (searchValue !== "") {
+    if (searchValue.length > 0) {
       searchQuery(token, searchValue).then((response) => {
         dispatch({ type: "setSearchResult", payload: response });
         setShowResult(true);
       });
-    }
+    } else setShowResult(false);
   }, [dispatch, searchValue, token]);
 
   return (
@@ -33,11 +33,11 @@ const SearchBody = ({ headerBg }) => {
       {loading ? null : (
         <>
           <Header headerBg={headerBg} type="search" />
-          {searchValue !== "" && showResult ? (
+          {searchValue !== "" ? (
             <SearchResult showResult={showResult} />
           ) : (
             <div className="pt-8 h-screen px-8">
-              {!showCategory ? (
+              {selectedCategory === null ? (
                 <>
                   <div className="text-[#fff] block font-sans items-center">
                     <p className="font-semibold text-[25px]">Your top genres</p>

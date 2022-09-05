@@ -12,14 +12,22 @@ const CardComponent = ({ ...props }) => {
   const { token, currentlyPlayingTrack, playingState } = state;
 
   const playOrPauseCollection = (type) => {
-    playerState(type, token, props.uri).then(() => {
-      if (type === "pause") {
-        dispatch({ type: "setPlayingState", payload: false });
-      } else dispatch({ type: "setPlayingState", payload: true });
-      fetchCurrentlyPlaying(token).then((response) => {
-        dispatch({ type: "setPlayingTrack", payload: response });
-      });
-    });
+    playerState(type, token, props.uri)
+      .then((response) => {
+        if (type === "pause") {
+          dispatch({ type: "setPlayingState", payload: false });
+        } else {
+          dispatch({
+            type: "setPlayingState",
+            payload: true,
+          });
+        }
+      })
+      .then(() =>
+        fetchCurrentlyPlaying(token).then((response) => {
+          dispatch({ type: "setPlayingTrack", payload: response });
+        })
+      );
   };
   return (
     <div className="group isolate flex-1 hover:bg-[#222222] hover:cursor-pointer rounded-[10px] bg-[#181818] flex justify-center">
@@ -40,7 +48,7 @@ const CardComponent = ({ ...props }) => {
                   />
                 ) : (
                   <IoIosPause
-                    className="text-black text-[25px] ml-[4px] "
+                    className="text-black text-[25px] "
                     onClick={() => playOrPauseCollection("pause")}
                   />
                 )}

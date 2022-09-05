@@ -20,7 +20,7 @@ const PlayingTrack = () => {
         <>
           <img alt="" src={image} className="w-14 h-14 bg-contain" />
           <div className="grid">
-            <p className="text-[14px] text-[#fff] hover:underline hover:cursor-pointer ">
+            <p className="text-[14px] text-[#fff] hover:underline hover:cursor-pointer truncate">
               {name}
             </p>
             <div className="flex gap-1">
