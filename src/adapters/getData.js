@@ -71,7 +71,6 @@ export const fetchCurrentlyPlaying = async (token) => {
 
     if (response.data !== "") {
       const { item } = response.data;
-      // console.log(item);
       const currentlyPlaying = {
         id: item.id,
         name: item.name,
@@ -86,8 +85,6 @@ export const fetchCurrentlyPlaying = async (token) => {
   } catch (error) {
     console.log(error);
   }
-
-  // return data;
 };
 export const fetchPlayerState = async (token) => {
   try {
@@ -130,6 +127,28 @@ export const fetchCategories = async (token) => {
     const data = response.data.categories.items?.map(({ name, id, icons }) => {
       return { name, id, icons };
     });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const fetchCategoryItem = async (token, id) => {
+  try {
+    const response = await axios.get(
+      `https://api.spotify.com/v1/browse/categories/${id}/playlists`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data.playlists.items?.map(
+      ({ name, id, description, images, uri }) => {
+        return { name, id, description, images, uri };
+      }
+    );
+    console.log(response.data);
     return data;
   } catch (error) {
     console.log(error);

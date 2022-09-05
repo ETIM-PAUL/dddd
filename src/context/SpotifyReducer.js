@@ -48,6 +48,12 @@ export function spotifyReducer(state, { type, payload }) {
         categories: payload,
       };
     }
+    case "setCategory": {
+      return {
+        ...state,
+        selectedCategory: payload,
+      };
+    }
     case "setSearchValue": {
       return {
         ...state,

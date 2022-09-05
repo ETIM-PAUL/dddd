@@ -10,7 +10,6 @@ const CardComponent = ({ ...props }) => {
   const squareImages = " w-40 h-40 bg-cover group-shadow-2xl";
   const { state, dispatch } = useSpotify();
   const { token, currentlyPlayingTrack, playingState } = state;
-  const { uri } = currentlyPlayingTrack;
 
   const playOrPauseCollection = (type) => {
     playerState(type, token, props.uri).then(() => {
@@ -34,7 +33,7 @@ const CardComponent = ({ ...props }) => {
           >
             {props.type === "show" || props.type === "episode" ? null : (
               <div className="w-[45px] h-[45px] rounded-[50%] bg-[#1ad760] hidden  absolute bottom-32 ml-[6.5rem] group-hover:flex  items-center justify-center hover:w-[47px] hover:h-[47px] ">
-                {props.uri !== uri || !playingState ? (
+                {props.uri !== currentlyPlayingTrack?.uri || !playingState ? (
                   <ImPlay3
                     className="text-black text-[25px] ml-[4px] "
                     onClick={() => playOrPauseCollection("play")}
@@ -52,9 +51,15 @@ const CardComponent = ({ ...props }) => {
 
         <div className="mb-8 font-sans font-bold grid gap-2">
           <p className="text-white truncate">{props.name}</p>
-          <p className="text-[gray] text-[13px] capitalize font-medium font-sans">
-            {props.type}
-          </p>
+          {props.type === "category" ? (
+            <p className="text-[gray] text-[13px] capitalize font-medium font-sans truncate">
+              {props.desc}
+            </p>
+          ) : (
+            <p className="text-[gray] text-[13px] capitalize font-medium font-sans">
+              {props.type}
+            </p>
+          )}
         </div>
       </div>
     </div>

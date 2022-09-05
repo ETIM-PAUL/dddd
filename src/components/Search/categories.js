@@ -1,9 +1,19 @@
 import React, { useEffect, useRef } from "react";
+import { useSpotify } from "../../context/SpotifyContext";
 import { colors } from "../../utils/globalConstants";
 
 const Category = ({ ...props }) => {
+  const { dispatch } = useSpotify();
   const categoryRef = useRef();
-
+  const { id, name } = props;
+  const showCategoryItems = () => {
+    props.setShowCategory(true);
+    const selectedCategory = {
+      id: id,
+      name: name,
+    };
+    dispatch({ type: "setCategory", payload: selectedCategory });
+  };
   useEffect(() => {
     if (categoryRef.current === undefined) {
       return;
@@ -16,8 +26,9 @@ const Category = ({ ...props }) => {
 
   return (
     <div
-      className="rounded-[10px] bg-[blue] overflow-hidden grid gap-8 category flex-1"
+      className="rounded-[10px] bg-[blue] overflow-hidden grid gap-8 category flex-1 hover:cursor-pointer"
       ref={categoryRef}
+      onClick={() => showCategoryItems()}
     >
       <div className="pt-1 h-[60px] flex">
         <span className=" font-sans text-[25px] font-bold category__title">
