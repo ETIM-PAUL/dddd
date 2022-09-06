@@ -4,15 +4,11 @@ import {
   durationToMinsAndSecs,
   mostPopularItems,
   mostPopularItemData,
-  mostPopularItem,
 } from "../../utils/utilFunctions";
 import TrackInfo from "../Playlist/TrackInfo";
 import { ImPlay3 } from "react-icons/im";
 import SearchItemCategory from "./searchItemsCategory";
-import {
-  fetchCurrentlyPlaying,
-  fetchPlayerState,
-} from "../../adapters/getData";
+import { fetchCurrentlyPlaying } from "../../adapters/getData";
 import { playerState } from "../../adapters/setData";
 
 const SearchFilter = ({ title }) => {

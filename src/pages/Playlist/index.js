@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchPlaylist } from "../../adapters/getData";
+import { fetchCurrentlyPlaying, fetchPlaylist } from "../../adapters/getData";
 import { useSpotify } from "../../context/SpotifyContext";
 import "../../styles/body.css";
 import PlaylistTable from "../../components/Playlist/PlaylistTable";
@@ -19,13 +19,25 @@ import Header from "../../components/HeaderNav/Header";
 const PlaylistDetails = ({ tableHeading, headerBg }) => {
   const { state, dispatch } = useSpotify();
   const [loading, setLoading] = useState(true);
-  const { token, selectedPlaylist, playingState, selectedPlaylistData } = state;
+  const {
+    token,
+    selectedPlaylist,
+    playingState,
+    selectedPlaylistData,
+    currentlyPlayingTrack,
+  } = state;
 
   const setPlayerState = (type) => {
-    playerState(type, token);
-    if (type === "pause") {
-      dispatch({ type: "setPlayingState", payload: false });
-    } else dispatch({ type: "setPlayingState", payload: true });
+    playerState(type, token, selectedPlaylistData.uri).then(() => {
+      if (type === "pause") {
+        dispatch({ type: "setPlayingState", payload: false });
+      } else {
+        dispatch({ type: "setPlayingState", payload: true });
+        fetchCurrentlyPlaying(token).then((response) => {
+          dispatch({ type: "setPlayingTrack", payload: response });
+        });
+      }
+    });
   };
 
   useEffect(() => {
@@ -53,7 +65,8 @@ const PlaylistDetails = ({ tableHeading, headerBg }) => {
                   <div className="flex items-center gap-6">
                     {selectedPlaylistData.tracks.length > 0 && (
                       <div className="flex items-center gap-6">
-                        {!playingState ? (
+                        {currentlyPlayingTrack.uri !==
+                          selectedPlaylistData.uri || !playingState ? (
                           <div className="w-[55px] h-[55px]">
                             <div className="w-[48px] h-[48px] rounded-[50%] bg-[#1ad760] flex items-center justify-center hover:w-[50px] hover:h-[50px]">
                               <ImPlay3

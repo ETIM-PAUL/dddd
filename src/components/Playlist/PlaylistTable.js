@@ -42,7 +42,7 @@ const PlaylistTable = ({ tableHeading }) => {
         ) => {
           return (
             <div
-              className="grid grid-cols-tableGridBody text-[gray] uppercase text-[13px] font-sans px-[3.5rem] hover:bg-[#2b2b2b] hover:rounded-md z-20"
+              className="grid grid-cols-tableGridBody text-[gray] uppercase text-[13px] font-sans px-[1.5rem] hover:bg-[#2b2b2b] hover:rounded-md z-20 mx-8"
               key={id}
             >
               <TrackInfo

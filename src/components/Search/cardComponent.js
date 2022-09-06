@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ImPlay3 } from "react-icons/im";
 import { fetchCurrentlyPlaying } from "../../adapters/getData";
 import { playerState } from "../../adapters/setData";
@@ -12,23 +12,23 @@ const CardComponent = ({ ...props }) => {
   const { token, currentlyPlayingTrack, playingState } = state;
 
   const playOrPauseCollection = (type) => {
-    playerState(type, token, props.uri)
-      .then((response) => {
-        if (type === "pause") {
-          dispatch({ type: "setPlayingState", payload: false });
-        } else {
-          dispatch({
-            type: "setPlayingState",
-            payload: true,
-          });
-        }
-      })
-      .then(() =>
+    playerState(type, token, props.uri).then(() => {
+      if (type === "pause") {
+        dispatch({ type: "setPlayingState", payload: false });
+      } else {
+        dispatch({
+          type: "setPlayingState",
+          payload: true,
+        });
         fetchCurrentlyPlaying(token).then((response) => {
           dispatch({ type: "setPlayingTrack", payload: response });
-        })
-      );
+        });
+      }
+    });
   };
+
+  useEffect(() => {}, [dispatch, token]);
+
   return (
     <div className="group isolate flex-1 hover:bg-[#222222] hover:cursor-pointer rounded-[10px] bg-[#181818] flex justify-center">
       <div className="block  px-4">
