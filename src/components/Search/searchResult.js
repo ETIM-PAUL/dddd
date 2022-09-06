@@ -36,8 +36,6 @@ const SearchResult = ({ showResult }) => {
     });
   };
 
-  mostPopularItem(searchResult);
-
   return (
     <>
       {Object.keys(searchResult).length > 0 ? (

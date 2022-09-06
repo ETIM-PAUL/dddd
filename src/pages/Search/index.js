@@ -5,6 +5,7 @@ import Category from "../../components/Search/categories";
 import Header from "../../components/HeaderNav/Header";
 import SearchResult from "../../components/Search/searchResult";
 import CategoryItems from "../../components/Search/category";
+import { mostPopularItem } from "../../utils/utilFunctions";
 
 const SearchBody = ({ headerBg }) => {
   const { state, dispatch } = useSpotify();
@@ -22,6 +23,7 @@ const SearchBody = ({ headerBg }) => {
     });
     if (searchValue) {
       searchQuery(token, searchValue).then((response) => {
+        mostPopularItem(response);
         dispatch({ type: "setSearchResult", payload: response });
         setShowResult(true);
       });
