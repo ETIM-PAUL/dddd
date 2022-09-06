@@ -20,12 +20,12 @@ const SearchBody = ({ headerBg }) => {
         setLoading(false);
       }, 1000);
     });
-    if (searchValue.length > 0) {
+    if (searchValue) {
       searchQuery(token, searchValue).then((response) => {
         dispatch({ type: "setSearchResult", payload: response });
         setShowResult(true);
       });
-    } else setShowResult(false);
+    }
   }, [dispatch, searchValue, token]);
 
   return (

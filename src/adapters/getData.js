@@ -148,7 +148,7 @@ export const fetchCategoryItem = async (token, id) => {
         return { name, id, description, images, uri };
       }
     );
-    console.log(response.data);
+    // console.log(response.data);
     return data;
   } catch (error) {
     console.log(error);

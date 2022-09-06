@@ -13,7 +13,7 @@ const SearchItemCategory = ({ title }) => {
         <div
           className="py-2 grid  auto-rows-[0] relative bg-transparent rounded-lg overflow-hidden columns-3xs"
           style={{
-            gridTemplateColumns: `repeat(auto-fit,minmax(200px, 1fr))`,
+            gridTemplateColumns: `repeat(auto-fill,minmax(200px, 1fr))`,
             gridTemplateRows: "100%",
             columnGap: 20,
             columns: "",

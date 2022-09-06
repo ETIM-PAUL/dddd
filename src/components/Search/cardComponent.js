@@ -32,29 +32,28 @@ const CardComponent = ({ ...props }) => {
   return (
     <div className="group isolate flex-1 hover:bg-[#222222] hover:cursor-pointer rounded-[10px] bg-[#181818] flex justify-center">
       <div className="block  px-4">
-        <div className="mt-4 mb-3 object-fill">
+        <div className="mt-4 mb-3 object-fill relative">
           <div
             className={props.type === "artist" ? roundedImages : squareImages}
             style={{
               backgroundImage: `url(${props.image[0]?.url})`,
             }}
-          >
-            {props.type === "show" || props.type === "episode" ? null : (
-              <div className="w-[45px] h-[45px] rounded-[50%] bg-[#1ad760] hidden  absolute bottom-32 ml-[6.5rem] group-hover:flex  items-center justify-center hover:w-[47px] hover:h-[47px] ">
-                {props.uri !== currentlyPlayingTrack?.uri || !playingState ? (
-                  <ImPlay3
-                    className="text-black text-[25px] ml-[4px] "
-                    onClick={() => playOrPauseCollection("play")}
-                  />
-                ) : (
-                  <IoIosPause
-                    className="text-black text-[25px] "
-                    onClick={() => playOrPauseCollection("pause")}
-                  />
-                )}
-              </div>
-            )}
-          </div>
+          ></div>
+          {props.type === "show" || props.type === "episode" ? null : (
+            <div className="w-[45px] h-[45px] rounded-[50%] bg-[#1ad760] hidden absolute bottom-4 ml-[6.5rem] group-hover:grid  items-center justify-center hover:w-[47px] hover:h-[47px] ">
+              {props.uri !== currentlyPlayingTrack?.uri || !playingState ? (
+                <ImPlay3
+                  className="text-black text-[25px] ml-[4px] "
+                  onClick={() => playOrPauseCollection("play")}
+                />
+              ) : (
+                <IoIosPause
+                  className="text-black text-[25px] "
+                  onClick={() => playOrPauseCollection("pause")}
+                />
+              )}
+            </div>
+          )}
         </div>
 
         <div className="mb-8 font-sans font-bold grid gap-2">

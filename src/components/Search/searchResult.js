@@ -5,11 +5,9 @@ import {
   mostPopularItems,
   mostPopularItemData,
   mostPopularItem,
-  spaceArtistes,
 } from "../../utils/utilFunctions";
 import TrackInfo from "../Playlist/TrackInfo";
 import { ImPlay3 } from "react-icons/im";
-import { IoIosPause } from "react-icons/io";
 import SearchItemCategory from "./searchItemsCategory";
 import {
   fetchCurrentlyPlaying,
@@ -79,7 +77,6 @@ const SearchResult = ({ showResult }) => {
                       onClick={() => playCollection(mostPopularItemData.uri)}
                     />
                   </div>
-                  {/* <ImPlay3 className="text-[#1ad760] text-[55px] hover: absolute bottom-6 right-5 hover:p-[1px]" /> */}
                 </div>
               </div>
             </section>
