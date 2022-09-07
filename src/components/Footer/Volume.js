@@ -67,7 +67,7 @@ const Volume = () => {
         )}
         <div className="flex items-center ">
           <input
-            type="range"
+            className="volumeRange"
             min={0}
             max={100}
             value={volumeVal || ""}

@@ -63,31 +63,32 @@ const PlaylistDetails = ({ tableHeading, headerBg }) => {
               <div className="pt-8 h-screen">
                 <div className="flex justify-between mx-8">
                   <div className="flex items-center gap-6">
-                    {selectedPlaylistData.tracks.length > 0 && (
-                      <div className="flex items-center gap-6">
-                        {currentlyPlayingTrack.uri !==
-                          selectedPlaylistData.uri || !playingState ? (
-                          <div className="w-[55px] h-[55px]">
-                            <div className="w-[48px] h-[48px] rounded-[50%] bg-[#1ad760] flex items-center justify-center hover:w-[50px] hover:h-[50px]">
-                              <ImPlay3
-                                className="text-black text-[25px] ml-px"
-                                onClick={() => setPlayerState("play")}
-                              />
+                    {selectedPlaylistData &&
+                      selectedPlaylistData.tracks.length > 0 && (
+                        <div className="flex items-center gap-6">
+                          {currentlyPlayingTrack.uri !==
+                            selectedPlaylistData.uri || !playingState ? (
+                            <div className="w-[55px] h-[55px]">
+                              <div className="w-[48px] h-[48px] rounded-[50%] bg-[#1ad760] hover:bg-[#5cc75c] flex items-center justify-center hover:w-[50px] hover:h-[50px]">
+                                <ImPlay3
+                                  className="text-black text-[25px] ml-px"
+                                  onClick={() => setPlayerState("play")}
+                                />
+                              </div>
                             </div>
-                          </div>
-                        ) : (
-                          <div className="w-[55px] h-[55px]">
-                            <div className="w-[48px] h-[48px] rounded-[50%] bg-[#1ad760] flex items-center justify-center hover:w-[50px] hover:h-[50px]">
-                              <IoIosPause
-                                className=" text-[25px] ml-px "
-                                onClick={() => setPlayerState("pause")}
-                              />
+                          ) : (
+                            <div className="w-[55px] h-[55px]">
+                              <div className="w-[48px] h-[48px] rounded-[50%] bg-[#1ad760] hover:bg-[#5cc75c] flex items-center justify-center hover:w-[50px] hover:h-[50px]">
+                                <IoIosPause
+                                  className=" text-[25px] ml-px "
+                                  onClick={() => setPlayerState("pause")}
+                                />
+                              </div>
                             </div>
-                          </div>
-                        )}
-                        <MdOutlineDownloadForOffline className="text-[#b3b3b3] text-[35px]" />
-                      </div>
-                    )}
+                          )}
+                          <MdOutlineDownloadForOffline className="text-[#b3b3b3] text-[35px]" />
+                        </div>
+                      )}
                     <MdOutlinePersonAdd className="text-[#b3b3b3] text-[35px]" />
                     <BsThreeDots className="text-[#b3b3b3] text-[35px]" />
                   </div>

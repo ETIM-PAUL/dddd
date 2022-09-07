@@ -7,8 +7,10 @@ import {
   MdArrowDropDown,
   MdArrowDropUp,
 } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ headerBg, type }) => {
+  const navigate = useNavigate();
   const { state, dispatch } = useSpotify();
   const { selectedCategory, selectedPlaylistData } = state;
   const [searchInput, setSearchInput] = useState("");
@@ -31,10 +33,20 @@ const Header = ({ headerBg, type }) => {
       <div className={headerBg ? bgColor : noBgColor}>
         <div className=" flex w-[100%] justify-between items-center">
           <div className="flex gap-4 items-center">
-            <div className="rounded-[50%] bg-black w-[36px] h-[36px] flex items-center justify-center">
+            <div
+              className="rounded-[50%] bg-black w-[36px] h-[36px] flex items-center justify-center"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
               <MdKeyboardArrowLeft className="text-[30px] text-[#fff] " />
             </div>
-            <div className="rounded-[50%] bg-black w-[35px] h-[35px] flex items-center justify-center">
+            <div
+              className="rounded-[50%] bg-black w-[35px] h-[35px] flex items-center justify-center"
+              onClick={() => {
+                navigate(1);
+              }}
+            >
               <MdKeyboardArrowRight className="text-[30px] text-[#fff] " />
             </div>
             {type === "search" && (

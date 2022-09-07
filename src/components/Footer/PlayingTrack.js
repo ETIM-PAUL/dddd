@@ -12,7 +12,7 @@ const PlayingTrack = () => {
     }
   }, [currentlyPlayingTrack]);
 
-  const { name, artistes, duration, image } = playingTrack;
+  const { name, artistes, image } = playingTrack;
 
   return (
     <div className="flex gap-4 items-center flex-1">
