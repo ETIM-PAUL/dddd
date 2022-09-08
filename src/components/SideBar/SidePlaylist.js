@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { fetchPlaylists } from "../../adapters/getData";
 import { useSpotify } from "../../context/SpotifyContext";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const SideBarPlaylists = () => {
   const { state, dispatch } = useSpotify();
@@ -19,7 +19,11 @@ const SideBarPlaylists = () => {
       <ul>
         {playlists.map(({ name, id }) => {
           return (
-            <Link to={`/playlist/${id}`} key={id}>
+            <NavLink
+              to={`/playlist/${id}`}
+              key={id}
+              style={({ isActive }) => ({ color: isActive ? "white" : "gray" })}
+            >
               <li
                 onClick={() => {
                   dispatch({ type: "setPlaylist", payload: id });
@@ -29,7 +33,7 @@ const SideBarPlaylists = () => {
               >
                 {name}
               </li>
-            </Link>
+            </NavLink>
           );
         })}
       </ul>

@@ -28,9 +28,9 @@ export const playerState = async (type, token, context_uri, track_number) => {
       {
         context_uri,
         position_ms: 0,
+        offset: parseInt(track_number - 1),
       },
       {
-        position_ms: 0,
         headers: {
           Authorization: "Bearer " + token,
           "Content-Type": "application/json",
@@ -57,6 +57,24 @@ export const skipTrack = async (type, token) => {
     );
 
     fetchCurrentlyPlaying(token);
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const seekToPosition = async (token, value) => {
+  try {
+    await axios.put(
+      `https://api.spotify.com/v1/me/player/seek?position_ms=${parseInt(
+        value
+      )}`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
   } catch (error) {
     console.log(error);
   }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BiShuffle, BiRepeat } from "react-icons/bi";
 import { CgPlayTrackNext, CgPlayTrackPrev } from "react-icons/cg";
-import { playerState, skipTrack } from "../../adapters/setData";
+import { playerState, seekToPosition, skipTrack } from "../../adapters/setData";
 import { ImPlay3 } from "react-icons/im";
 import { IoIosPause } from "react-icons/io";
 import { useSpotify } from "../../context/SpotifyContext";
@@ -21,6 +21,12 @@ const SpotifyPlayerController = () => {
       dispatch({ type: "setPlayingTrack", payload: response });
     });
   };
+
+  // setInterval(() => {
+  //   fetchCurrentlyPlayingProgress(token).then((response) => {
+  //     setCurrentTime(response);
+  //   });
+  // }, 1000);
   const skipPlayingTrack = (type) => {
     skipTrack(type, token).then(() => {
       fetchCurrentlyPlaying(token).then((response) => {
@@ -72,7 +78,10 @@ const SpotifyPlayerController = () => {
               max={Math.floor(currentlyPlayingTrack.duration)}
               className="audio-slider w-[400px]"
               value={currentTime}
-              onChange={(e) => setCurrentTime(e.target.value)}
+              onChange={(e) => {
+                seekToPosition(token, e.target.value);
+                setCurrentTime(e.target.value);
+              }}
             />
 
             <span className="text-[gray] text-[12px] ">

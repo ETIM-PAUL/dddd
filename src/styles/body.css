@@ -57,7 +57,7 @@
   .volumeRange {
     border-radius: 8px;
     height: 4px;
-    width: 80px;
+    width: 80px !important;
     outline: none;
     -webkit-appearance: none;
     background-color: gray;
@@ -115,7 +115,7 @@
     margin-top: -1px;
   }
 
-  .volumeRange::-webkit-slider-runnable-track {
+  .volumeRange {
     height: 10px;
     -webkit-appearance: none;
     color: #13bba4;

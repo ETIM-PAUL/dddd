@@ -12,7 +12,7 @@ const CardComponent = ({ ...props }) => {
   const { token, currentlyPlayingTrack, playingState } = state;
 
   const playOrPauseCollection = (type) => {
-    playerState(type, token, props.uri).then(() => {
+    playerState(type, token, props.uri, props.track_number).then(() => {
       if (type === "pause") {
         dispatch({ type: "setPlayingState", payload: false });
       } else {
@@ -30,9 +30,9 @@ const CardComponent = ({ ...props }) => {
   useEffect(() => {}, [dispatch, token]);
 
   return (
-    <div className="group isolate flex-1 hover:bg-[#222222] hover:cursor-pointer rounded-[10px] bg-[#181818] flex justify-center">
-      <div className="block  px-4">
-        <div className="mt-4 mb-3 object-fill relative">
+    <div className="group isolate flex-1 shrink-0 hover:bg-[#222222] hover:cursor-pointer rounded-[10px] bg-[#181818] flex">
+      <div className="inline-grid  px-4">
+        <div className="mt-4 mb-3 object-contain relative">
           <div
             className={props.type === "artist" ? roundedImages : squareImages}
             style={{

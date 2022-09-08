@@ -56,6 +56,74 @@ export const fetchPlaylist = async (token, playlist) => {
     console.log(error);
   }
 };
+export const featuredPlaylists = async (token) => {
+  try {
+    const response = await axios.get(
+      "https://api.spotify.com/v1/browse/featured-playlists",
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data.playlists.items;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const userTopItems = async (token) => {
+  const type = "artists";
+  try {
+    const response = await axios.get(
+      `https://api.spotify.com/v1/me/top/${type}`,
+
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data.items;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const newReleases = async (token) => {
+  try {
+    const response = await axios.get(
+      "https://api.spotify.com/v1/browse/new-releases",
+
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data.albums.items;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const recentPlayed = async (token) => {
+  try {
+    const response = await axios.get(
+      "https://api.spotify.com/v1/me/player/recently-played",
+
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data.items;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const fetchCurrentlyPlaying = async (token) => {
   try {
@@ -78,9 +146,29 @@ export const fetchCurrentlyPlaying = async (token) => {
         duration: item.duration_ms,
         image: item.album.images[0].url,
         uri: response.data.context.uri,
+        progress_ms: response.data.progress_ms,
       };
 
       return currentlyPlaying;
+    } else return null;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const fetchCurrentlyPlayingProgress = async (token) => {
+  try {
+    const response = await axios.get(
+      "https://api.spotify.com/v1/me/player/currently-playing",
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (response.data !== "") {
+      return response.data.progress_ms;
     } else return null;
   } catch (error) {
     console.log(error);
@@ -148,7 +236,6 @@ export const fetchCategoryItem = async (token, id) => {
         return { name, id, description, images, uri };
       }
     );
-    // console.log(response.data);
     return data;
   } catch (error) {
     console.log(error);

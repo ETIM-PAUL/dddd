@@ -23,7 +23,7 @@ const CategoryItems = () => {
             {selectedCategory.name}
           </span>
 
-          <div className="flex flex-wrap gap-6 relative">
+          <div className="flex flex-wrap gap-6 relative justify-center">
             {items.map(({ id, name, images, description, uri }) => {
               return (
                 <CardComponent

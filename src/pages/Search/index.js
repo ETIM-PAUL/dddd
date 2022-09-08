@@ -32,9 +32,9 @@ const SearchBody = ({ headerBg }) => {
 
   return (
     <>
+      <Header headerBg={headerBg} type="search" />
       {loading ? null : (
         <>
-          <Header headerBg={headerBg} type="search" />
           {searchValue !== "" ? (
             <SearchResult showResult={showResult} />
           ) : (
