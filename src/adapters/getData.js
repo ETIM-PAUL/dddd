@@ -1,5 +1,23 @@
 import axios from "axios";
 
+export const fetchUser = async (token) => {
+  try {
+    const response = await axios.get("https://api.spotify.com/v1/me", {
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+    });
+    const user = {
+      name: response.data.display_name,
+      id: response.data.id,
+      image: response.data.images,
+    };
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const fetchPlaylists = async (token) => {
   try {
     const response = await axios.get(

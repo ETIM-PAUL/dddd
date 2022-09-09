@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 const Header = ({ headerBg, type }) => {
   const navigate = useNavigate();
   const { state, dispatch } = useSpotify();
-  const { selectedCategory, selectedPlaylistData } = state;
+  const { selectedCategory, selectedPlaylistData, user } = state;
   const [searchInput, setSearchInput] = useState("");
 
   const [showDropDown, setShowDropDown] = useState(false);
@@ -82,7 +82,7 @@ const Header = ({ headerBg, type }) => {
               <FiUser className=" text-[18px]" />
             </div>
             <span className=" text-[13px] font-bold font-sans ml-[2px]">
-              Paul Etim
+              {user && user.name}
             </span>
             <span className=" text-[30px] mr-[2px] ">
               {!showDropDown ? <MdArrowDropDown /> : <MdArrowDropUp />}

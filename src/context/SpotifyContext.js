@@ -15,6 +15,7 @@ const SpotifyProvider = ({ children }) => {
     selectedCategory: null,
     searchValue: "",
     searchResult: {},
+    user: {},
   });
 
   const value = { state, dispatch };

@@ -14,10 +14,10 @@ const Volume = () => {
   const { token, playerVolume } = state;
 
   useEffect(() => {
-    fetchPlayerState().then((res) => {
+    fetchPlayerState(token).then((res) => {
       setVolumeVal(res.volume);
     });
-  }, []);
+  }, [token]);
 
   const toggleVolume = (type) => {
     setMute(!mute);

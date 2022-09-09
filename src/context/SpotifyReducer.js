@@ -1,5 +1,11 @@
 export function spotifyReducer(state, { type, payload }) {
   switch (type) {
+    case "setUser": {
+      return {
+        ...state,
+        user: payload,
+      };
+    }
     case "setSpotifyToken": {
       return {
         ...state,
