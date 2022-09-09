@@ -23,7 +23,10 @@ const SideBar = () => {
 
   return (
     <>
-      <div ref={sideBar} className="bg-[#000] w-[300px] z-30 block px-6">
+      <div
+        ref={sideBar}
+        className="bg-[#000] w-[300px] min-w-[300px] z-30 block px-6"
+      >
         <svg
           viewBox="0 0 1134 340"
           className="spotify-logo--text mt-6 mb-7 w h-10"

@@ -11,12 +11,11 @@ const HomeCategory = ({ ...props }) => {
             {props.title}
           </span>
           <div
-            className="py-2 grid  auto-rows-[0] relative bg-transparent rounded-lg overflow-hidden columns-3xs"
+            className="py-2 grid  auto-rows-[0] relative bg-transparent rounded-lg overflow-hidden"
             style={{
-              gridTemplateColumns: `repeat(auto-fill,minmax(200px, 1fr))`,
+              gridTemplateColumns: `repeat(auto-fill,minmax(180px, 1fr))`,
               gridTemplateRows: "100%",
               columnGap: 20,
-              columns: "",
             }}
           >
             {props.title !== "Recently played" &&

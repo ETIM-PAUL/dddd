@@ -5,6 +5,7 @@ import { TbMicrophone2 } from "react-icons/tb";
 import { BiDevices } from "react-icons/bi";
 
 import { BsVolumeDown, BsVolumeMute, BsStack } from "react-icons/bs";
+import { fetchPlayerState } from "../../adapters/getData";
 const Volume = () => {
   const [mute, setMute] = useState(false);
   const [volumeVal, setVolumeVal] = useState("");
@@ -13,27 +14,33 @@ const Volume = () => {
   const { token, playerVolume } = state;
 
   useEffect(() => {
-    setVolumeVal(playerVolume);
-  }, [playerVolume]);
+    fetchPlayerState().then((res) => {
+      setVolumeVal(res.volume);
+    });
+  }, []);
 
-  const toggleVolume = () => {
-    if (mute === false) {
+  const toggleVolume = (type) => {
+    setMute(!mute);
+    if (type === "mute") {
       changeVolume(token, 0);
-      setMute(true);
-      setVolumeVal(0);
+      fetchPlayerState().then((res) => {
+        setVolumeVal(res.volume);
+      });
       dispatch({ type: "setPlayerVolume", payload: 0 });
     } else {
       changeVolume(token, volumeVal);
-      setMute(false);
+      fetchPlayerState().then((res) => {
+        setVolumeVal(res.volume);
+      });
       dispatch({ type: "setPlayerVolume", payload: volumeVal });
     }
   };
   const setVolumeValue = (value) => {
-    setVolumeVal(value);
     changeVolume(token, value);
-    if (value === 0) {
+    if (value === "0") {
       setMute(true);
-    }
+    } else setMute(false);
+    setVolumeVal(value);
     dispatch({ type: "setPlayerVolume", payload: value });
   };
 
@@ -52,16 +59,16 @@ const Volume = () => {
         title="Devices"
       />
       <div className="flex gap-1">
-        {mute ? (
-          <BsVolumeMute
+        {!mute ? (
+          <BsVolumeDown
             className="text-[25px] text-[gray] hover:text-[#fff] self-center"
-            onClick={() => toggleVolume()}
+            onClick={() => toggleVolume("mute")}
             title="Unmute"
           />
         ) : (
-          <BsVolumeDown
+          <BsVolumeMute
             className="text-[25px] text-[gray] hover:text-[#fff]"
-            onClick={() => toggleVolume()}
+            onClick={() => toggleVolume("unmute")}
             title="Mute"
           />
         )}
@@ -71,7 +78,7 @@ const Volume = () => {
             className="volumeRange"
             min={0}
             max={100}
-            value={volumeVal || ""}
+            value={playerVolume}
             onChange={(e) => setVolumeValue(e.target.value)}
           />
         </div>

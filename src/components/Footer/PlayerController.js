@@ -22,11 +22,6 @@ const SpotifyPlayerController = () => {
     });
   };
 
-  // setInterval(() => {
-  //   fetchCurrentlyPlayingProgress(token).then((response) => {
-  //     setCurrentTime(response);
-  //   });
-  // }, 1000);
   const skipPlayingTrack = (type) => {
     skipTrack(type, token).then(() => {
       fetchCurrentlyPlaying(token).then((response) => {

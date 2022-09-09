@@ -23,8 +23,59 @@ const CategoryItems = () => {
             {selectedCategory.name}
           </span>
 
-          <div className="flex flex-wrap gap-6 relative justify-center">
+          <div
+            className="py-2 grid  auto-rows-[0] relative bg-transparent rounded-lg overflow-hidden"
+            style={{
+              gridTemplateColumns: `repeat(auto-fill,minmax(180px, 1fr))`,
+              gridTemplateRows: "100%",
+              columnGap: 20,
+            }}
+          >
             {items.map(({ id, name, images, description, uri }) => {
+              return (
+                <CardComponent
+                  key={id}
+                  id={id}
+                  name={name}
+                  type="category"
+                  image={images}
+                  uri={uri}
+                  desc={description}
+                />
+              );
+            })}
+          </div>
+          <div
+            className="py-2 grid  auto-rows-[0] relative bg-transparent rounded-lg overflow-hidden"
+            style={{
+              gridTemplateColumns: `repeat(auto-fill,minmax(180px, 1fr))`,
+              gridTemplateRows: "100%",
+              columnGap: 20,
+            }}
+          >
+            {items.slice(7).map(({ id, name, images, description, uri }) => {
+              return (
+                <CardComponent
+                  key={id}
+                  id={id}
+                  name={name}
+                  type="category"
+                  image={images}
+                  uri={uri}
+                  desc={description}
+                />
+              );
+            })}
+          </div>
+          <div
+            className="py-2 grid  auto-rows-[0] relative bg-transparent rounded-lg overflow-hidden"
+            style={{
+              gridTemplateColumns: `repeat(auto-fill,minmax(180px, 1fr))`,
+              gridTemplateRows: "100%",
+              columnGap: 20,
+            }}
+          >
+            {items.slice(14).map(({ id, name, images, description, uri }) => {
               return (
                 <CardComponent
                   key={id}
