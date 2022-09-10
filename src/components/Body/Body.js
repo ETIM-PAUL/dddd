@@ -3,6 +3,8 @@ import PlaylistDetails from "../../pages/Playlist";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../../pages/Home";
 import SearchBody from "../../pages/Search";
+import SongLyrics from "../../profile";
+import UserProfile from "../../profile";
 const Body = () => {
   const contentRef = useRef();
   const [headerBg, setHeaderBG] = useState(false);
@@ -11,7 +13,7 @@ const Body = () => {
   const contentScroll = () => {
     let scrollTopValue = contentRef.current.scrollTop;
     scrollTopValue >= 247 ? setHeaderBG(true) : setHeaderBG(false);
-    scrollTopValue >= 107 ? setSecondHeaderBG(true) : setSecondHeaderBG(false);
+    scrollTopValue >= 80 ? setSecondHeaderBG(true) : setSecondHeaderBG(false);
     scrollTopValue >= 380 ? setTableHeading(true) : setTableHeading(false);
   };
 
@@ -29,7 +31,11 @@ const Body = () => {
             <PlaylistDetails tableHeading={tableHeading} headerBg={headerBg} />
           }
         />
-        <Route path="/search" element={<SearchBody headerBg={headerBg} />} />
+        <Route
+          path="/search"
+          element={<SearchBody headerBg={secondheaderBg} />}
+        />
+        <Route path="/profile" element={<UserProfile headerBg={headerBg} />} />
       </Routes>
     </div>
   );

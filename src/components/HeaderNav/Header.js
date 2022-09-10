@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiUser } from "react-icons/fi";
 import { useSpotify } from "../../context/SpotifyContext";
 import {
@@ -7,7 +7,7 @@ import {
   MdArrowDropDown,
   MdArrowDropUp,
 } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 const Header = ({ headerBg, type }) => {
   const navigate = useNavigate();
@@ -27,6 +27,14 @@ const Header = ({ headerBg, type }) => {
     setSearchInput(value);
     dispatch({ type: "setSearchValue", payload: value });
   };
+  // useEffect(() => {
+  //   document.addEventListener("mouseup", function (e) {
+  //     var container = document.getElementById("container");
+  //     if (!container.contains(e.target)) {
+  //       setShowDropDown(false);
+  //     }
+  //   });
+  // }, []);
 
   return (
     <>
@@ -88,6 +96,28 @@ const Header = ({ headerBg, type }) => {
               {!showDropDown ? <MdArrowDropDown /> : <MdArrowDropUp />}
             </span>
           </div>
+          {showDropDown && (
+            <div
+              className="w-40 h-24 px-1 absolute top-16 rounded-lg right-8 bg-[#212121] font-sans"
+              id="container"
+            >
+              <div className="grid mt-3">
+                <NavLink
+                  to="/profile"
+                  style={({ isActive }) => ({
+                    color: isActive ? "white" : "gray",
+                  })}
+                >
+                  <span className="text-[#eee] text-[14px] font-medium py-2 px-2 hover:bg-[#313131] cursor-default">
+                    Profile
+                  </span>
+                </NavLink>
+                <span className="text-[#eee] text-[14px] font-medium py-2 px-2 hover:bg-[#313131] cursor-default">
+                  Log out
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

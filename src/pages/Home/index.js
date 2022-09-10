@@ -13,10 +13,10 @@ import { useSpotify } from "../../context/SpotifyContext";
 const HomePage = ({ headerBg }) => {
   const { state } = useSpotify();
   const { token } = state;
-  const [featured, setFeatured] = useState();
+  const [featured, setFeatured] = useState([]);
   const [greeting, setGreeting] = useState("");
-  const [userItems, setUserItems] = useState();
-  const [newAlbums, setNewAlbums] = useState();
+  const [userItems, setUserItems] = useState([]);
+  const [newAlbums, setNewAlbums] = useState([]);
   const [pop, setPop] = useState([]);
   const [afro, setAfro] = useState([]);
   const [hipHop, setHipHop] = useState([]);
@@ -36,7 +36,7 @@ const HomePage = ({ headerBg }) => {
   }, [curHr]);
   useEffect(() => {
     featuredPlaylists(token).then((response) => setFeatured(response));
-    userTopItems(token).then((response) => setUserItems(response));
+    userTopItems(token, "artists").then((response) => setUserItems(response));
     newReleases(token).then((response) => setNewAlbums(response));
     recentPlayed(token).then((response) => {
       setRecentlyPlayed(response);
@@ -75,6 +75,10 @@ const HomePage = ({ headerBg }) => {
         <HomeCategory items={userItems} title="Your favourite artists" />
         <HomeCategory items={newAlbums} title="New releases" />
         <HomeCategory items={randb} title="R&B around the globe" />
+        <img
+          src="http://tracking.musixmatch.com/t1.0/2fVHrSxsQbJUuj9MW9zG1e"
+          alt=""
+        />
       </div>
     </>
   );

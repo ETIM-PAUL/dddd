@@ -8,7 +8,6 @@ import { useSpotify } from "../context/SpotifyContext";
 const SpotifyPlayer = () => {
   const { state, dispatch } = useSpotify();
   useEffect(() => {
-    console.log(state.token);
     fetchUser(state.token).then((response) => {
       dispatch({ type: "setUser", payload: response });
     });

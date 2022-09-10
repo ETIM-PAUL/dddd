@@ -32,7 +32,7 @@ export const durationToMinsAndSecs = (duration) => {
 
 export const spaceArtistes = (artistes, type) => {
   if (artistes?.length > 0) {
-    if (type === "search") {
+    if (type === "search" || type === "profile") {
       return artistes.map((artiste) => artiste.name).join(", ");
     }
     return artistes.join(", ");

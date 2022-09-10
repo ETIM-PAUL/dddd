@@ -90,8 +90,8 @@ export const featuredPlaylists = async (token) => {
     console.log(error);
   }
 };
-export const userTopItems = async (token) => {
-  const type = "artists";
+export const userTopItems = async (token, type) => {
+  // const type = "artists";
   try {
     const response = await axios.get(
       `https://api.spotify.com/v1/me/top/${type}`,
@@ -137,6 +137,7 @@ export const recentPlayed = async (token) => {
         },
       }
     );
+    // console.log(response.data);
     return response.data.items;
   } catch (error) {
     console.log(error);
@@ -166,9 +167,37 @@ export const fetchCurrentlyPlaying = async (token) => {
         uri: response.data.context.uri,
         progress_ms: response.data.progress_ms,
       };
-
+      console.log(response.data);
       return currentlyPlaying;
     } else return null;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const fetchCurrentlyPlayingLyrics = async (token) => {
+  const song = "Easy on me";
+  const artist = "Adele";
+  try {
+    const response = await axios.get(
+      `https://api.lyrics.ovh/v1/${artist}/${song}`
+    );
+    const data = await response.json();
+    console.log(data);
+
+    // if (response.data !== "") {
+    //   const { item } = response.data;
+    //   const currentlyPlaying = {
+    //     id: item.id,
+    //     name: item.name,
+    //     artistes: item.artists.map((artiste) => artiste.name),
+    //     duration: item.duration_ms,
+    //     image: item.album.images[0].url,
+    //     uri: response.data.context.uri,
+    //     progress_ms: response.data.progress_ms,
+    //   };
+
+    //   return currentlyPlaying;
+    // } else return null;
   } catch (error) {
     console.log(error);
   }
