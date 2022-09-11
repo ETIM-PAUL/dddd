@@ -167,37 +167,33 @@ export const fetchCurrentlyPlaying = async (token) => {
         uri: response.data.context.uri,
         progress_ms: response.data.progress_ms,
       };
-      console.log(response.data);
       return currentlyPlaying;
     } else return null;
   } catch (error) {
     console.log(error);
   }
 };
-export const fetchCurrentlyPlayingLyrics = async (token) => {
-  const song = "Easy on me";
-  const artist = "Adele";
+export const fetchMusixMatchTrack = async (artist, track) => {
   try {
     const response = await axios.get(
-      `https://api.lyrics.ovh/v1/${artist}/${song}`
+      `http://localhost:5000/track?artist=${artist}&track=${track}`
     );
-    const data = await response.json();
-    console.log(data);
-
-    // if (response.data !== "") {
-    //   const { item } = response.data;
-    //   const currentlyPlaying = {
-    //     id: item.id,
-    //     name: item.name,
-    //     artistes: item.artists.map((artiste) => artiste.name),
-    //     duration: item.duration_ms,
-    //     image: item.album.images[0].url,
-    //     uri: response.data.context.uri,
-    //     progress_ms: response.data.progress_ms,
-    //   };
-
-    //   return currentlyPlaying;
-    // } else return null;
+    const trackDetails = {
+      track_id: response.data.message.body.track_list[0].track.track_id,
+      commontrack_id:
+        response.data.message.body.track_list[0].track.commontrack_id,
+    };
+    return trackDetails;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const fetchMusixMatchTrackLyrics = async (track_id, commontrack_id) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:5000/lyrics?track_id=${track_id}`
+    );
+    return response.data.message.body.lyrics.lyrics_body;
   } catch (error) {
     console.log(error);
   }

@@ -16,7 +16,7 @@ const PlayingTrack = () => {
 
   return (
     <div className="flex gap-4 items-center flex-1">
-      {currentlyPlayingTrack && (
+      {currentlyPlayingTrack ? (
         <>
           <img alt="" src={image} className="w-14 h-14 bg-contain" />
           <div className="grid">
@@ -30,6 +30,12 @@ const PlayingTrack = () => {
             </div>
           </div>
         </>
+      ) : (
+        <span className="text-[#b3b3b3] w-[300px] text-[10px] text-white font-bold">
+          Sorry, This app isn't synched with your current playing device. Please
+          refresh this page. If problem persist. You probably have a slow
+          network.
+        </span>
       )}
     </div>
   );

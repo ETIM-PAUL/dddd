@@ -6,6 +6,7 @@ import { BiDevices } from "react-icons/bi";
 
 import { BsVolumeDown, BsVolumeMute, BsStack } from "react-icons/bs";
 import { fetchPlayerState } from "../../adapters/getData";
+import { NavLink } from "react-router-dom";
 const Volume = () => {
   const [mute, setMute] = useState(false);
   const [volumeVal, setVolumeVal] = useState("");
@@ -46,10 +47,15 @@ const Volume = () => {
 
   return (
     <div className="flex gap-3 flex-1 justify-end">
-      <TbMicrophone2
-        className="text-[20px] text-[gray] hover:text-[#fff] self-center"
-        title="Lyrics"
-      />
+      <NavLink
+        to={`/lyrics`}
+        style={({ isActive }) => ({ color: isActive ? "#1ad760" : "gray" })}
+      >
+        <TbMicrophone2
+          className="text-[20px] hover:text-[#fff] self-center"
+          title="Lyrics"
+        />
+      </NavLink>
       <BsStack
         className="text-[20px] text-[gray] hover:text-[#fff] self-center"
         title="Queue"

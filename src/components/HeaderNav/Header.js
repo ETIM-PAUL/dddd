@@ -101,18 +101,19 @@ const Header = ({ headerBg, type }) => {
               className="w-40 h-24 px-1 absolute top-16 rounded-lg right-8 bg-[#212121] font-sans"
               id="container"
             >
-              <div className="grid mt-3">
+              <div className="grid mt-2">
                 <NavLink
                   to="/profile"
                   style={({ isActive }) => ({
                     color: isActive ? "white" : "gray",
                   })}
+                  className="w-full hover:bg-[#313131] py-2 px-2"
                 >
-                  <span className="text-[#eee] text-[14px] font-medium py-2 px-2 hover:bg-[#313131] cursor-default">
+                  <span className="text-[#eee] text-[14px] font-medium   cursor-default">
                     Profile
                   </span>
                 </NavLink>
-                <span className="text-[#eee] text-[14px] font-medium py-2 px-2 hover:bg-[#313131] cursor-default">
+                <span className="text-[#eee] text-[14px] w-full font-medium py-2 px-2 hover:bg-[#313131] cursor-default">
                   Log out
                 </span>
               </div>

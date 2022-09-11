@@ -9,7 +9,9 @@ const SearchItemCategory = ({ title }) => {
   return (
     <div>
       <section className="my-4">
-        <p className="font-bold text-[25px] capitalize">{title}</p>
+        {mostPopularItems(searchResult[title]).length > 0 && (
+          <p className="font-bold text-[25px] capitalize">{title}</p>
+        )}
         <div
           className="py-2 grid  auto-rows-[0] relative bg-transparent rounded-lg overflow-hidden columns-3xs"
           style={{

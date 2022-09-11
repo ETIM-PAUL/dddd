@@ -74,11 +74,7 @@ const HomePage = ({ headerBg }) => {
         <HomeCategory title="Afro Party vibes only" items={afro.slice(11)} />
         <HomeCategory items={userItems} title="Your favourite artists" />
         <HomeCategory items={newAlbums} title="New releases" />
-        <HomeCategory items={randb} title="R&B around the globe" />
-        <img
-          src="http://tracking.musixmatch.com/t1.0/2fVHrSxsQbJUuj9MW9zG1e"
-          alt=""
-        />
+        <HomeCategory items={randb.slice(0, 7)} title="R&B around the globe" />
       </div>
     </>
   );

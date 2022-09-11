@@ -63,7 +63,7 @@ export const mostPopularItems = (type) => {
     a.popularity < b.popularity ? 1 : a.popularity > b.popularity ? -1 : 0
   );
 
-  const itemsToDisplay = type.slice(0, 10);
+  const itemsToDisplay = type.slice(0, 20);
   return itemsToDisplay;
 };
 // export const mostPopularArtists = (searchResult) => {

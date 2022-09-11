@@ -7,9 +7,16 @@ const HomeCategory = ({ ...props }) => {
     <>
       {props.items && (
         <div className="my-4">
-          <span className="text-[#fff] font-bold text-[25px]">
-            {props.title}
-          </span>
+          <div className="grid">
+            <span className="text-[#fff] font-bold text-[25px]">
+              {props.title}
+            </span>
+            {props.type && (
+              <span className="text-[gray] font-sans font-normal text-[13px]">
+                Only visible to you
+              </span>
+            )}
+          </div>
           <div
             className="py-2 grid  auto-rows-[0] relative bg-transparent rounded-lg overflow-hidden"
             style={{
@@ -18,22 +25,23 @@ const HomeCategory = ({ ...props }) => {
               columnGap: 20,
             }}
           >
-            {props.title !== "Recently played" &&
-              props.items.map(({ id, name, images, type, uri }) => {
+            {props.items &&
+              props.title !== "Recently played" &&
+              props.items.map((item) => {
                 return (
                   <CardComponent
-                    key={id}
-                    id={id}
-                    name={name}
-                    type={type}
-                    image={images}
-                    uri={uri}
+                    key={item.id}
+                    id={item.id}
+                    name={item.name}
+                    type={item.type}
+                    image={item.images}
+                    uri={item.uri}
                   />
                 );
               })}
             {props.items &&
               props.title === "Recently played" &&
-              props.items.map((item, id) => {
+              props?.items.map((item, id) => {
                 return (
                   <CardComponent
                     key={id}

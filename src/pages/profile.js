@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { fetchCurrentlyPlayingLyrics, userTopItems } from "./adapters/getData";
-import Header from "./components/HeaderNav/Header";
-import { useSpotify } from "./context/SpotifyContext";
-import defaultImage from "./assets/defaultImg.jpeg";
-import HomeCategory from "./components/Home/HomeCategory";
-import { durationToMinsAndSecs, mostPopularItems } from "./utils/utilFunctions";
-import TrackInfo from "./components/Playlist/TrackInfo";
+import { userTopItems } from "../adapters/getData";
+import Header from "../components/HeaderNav/Header";
+import { useSpotify } from "../context/SpotifyContext";
+import defaultImage from "../assets/defaultImg.jpeg";
+import HomeCategory from "../components/Home/HomeCategory";
+import {
+  durationToMinsAndSecs,
+  mostPopularItems,
+} from "../utils/utilFunctions";
+import TrackInfo from "../components/Playlist/TrackInfo";
 
 const UserProfile = ({ headerBg }) => {
-  // const musixMatch = process.env.REACT_APP_MUSIXMATCH_CLIENT_ID;
-  // useEffect(() => {
-  //   fetchCurrentlyPlayingLyrics(musixMatch);
-  // }, [musixMatch]);
   const { state } = useSpotify();
   const { user, playlists, token } = state;
   const [userItems, setUserItems] = useState([]);
@@ -47,7 +46,11 @@ const UserProfile = ({ headerBg }) => {
           </div>
         </div>
         <div className="my-12 font-sans font-bold">
-          <HomeCategory items={userItems} title="Top artists this month" />
+          <HomeCategory
+            items={userItems}
+            title="Top artists this month"
+            type="profile"
+          />
         </div>
         <div className="my-12 font-sans font-bold">
           <div className="grid">
@@ -70,12 +73,12 @@ const UserProfile = ({ headerBg }) => {
                     id={id}
                     name={name}
                     artist={artists}
-                    album={album.name}
+                    album={album?.name}
                     image={album?.images[2]}
                     type="profile"
                   />
                   <span className="text-[#b3b3b3] py-1 self-center justify-start flex font-normal">
-                    {album.name}
+                    {album?.name}
                   </span>
                   <span className="text-[#b3b3b3] py-1 self-center font-normal">
                     {durationToMinsAndSecs(duration_ms)}

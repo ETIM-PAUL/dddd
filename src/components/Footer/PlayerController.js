@@ -62,7 +62,7 @@ const SpotifyPlayerController = () => {
           <BiRepeat className="text-[20px] text-[gray] hover:text-[#fff]" />
         </div>
 
-        {currentlyPlayingTrack && (
+        {currentlyPlayingTrack ? (
           <div className="flex items-center justify-between gap-2">
             <span className="text-[gray] text-[12px] w-[25px]">
               {durationToMinsAndSecs(currentTime)}
@@ -82,6 +82,23 @@ const SpotifyPlayerController = () => {
             <span className="text-[gray] text-[12px] ">
               {durationToMinsAndSecs(currentlyPlayingTrack.duration)}
             </span>
+          </div>
+        ) : (
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-[gray] text-[12px] w-[25px]">0.00</span>
+            <input
+              type="range"
+              min={0}
+              max={0}
+              className="audio-slider w-[400px]"
+              value={currentTime}
+              onChange={(e) => {
+                seekToPosition(token, e.target.value);
+                setCurrentTime(e.target.value);
+              }}
+            />
+
+            <span className="text-[gray] text-[12px] ">0.00</span>
           </div>
         )}
       </div>

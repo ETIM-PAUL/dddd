@@ -3,8 +3,8 @@ import PlaylistDetails from "../../pages/Playlist";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../../pages/Home";
 import SearchBody from "../../pages/Search";
-import SongLyrics from "../../profile";
-import UserProfile from "../../profile";
+import UserProfile from "../../pages/profile";
+import SongLyrics from "../../pages/songLyrics";
 const Body = () => {
   const contentRef = useRef();
   const [headerBg, setHeaderBG] = useState(false);
@@ -36,6 +36,7 @@ const Body = () => {
           element={<SearchBody headerBg={secondheaderBg} />}
         />
         <Route path="/profile" element={<UserProfile headerBg={headerBg} />} />
+        <Route path="/lyrics" element={<SongLyrics />} />
       </Routes>
     </div>
   );
