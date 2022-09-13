@@ -61,6 +61,7 @@ export const fetchPlaylist = async (token, playlist) => {
         id: item.track.id,
         name: item.track.name,
         isExplicit: item.track.explicit,
+        track_uri: item.track.uri,
         addedOn: item.added_at,
         color: item.primary_color,
         album: item.track.album.name,
@@ -91,7 +92,6 @@ export const featuredPlaylists = async (token) => {
   }
 };
 export const userTopItems = async (token, type) => {
-  // const type = "artists";
   try {
     const response = await axios.get(
       `https://api.spotify.com/v1/me/top/${type}`,
@@ -156,7 +156,7 @@ export const fetchCurrentlyPlaying = async (token) => {
       }
     );
 
-    if (response.data !== "") {
+    if (response.data.item !== null) {
       const { item } = response.data;
       const currentlyPlaying = {
         id: item.id,
@@ -165,10 +165,12 @@ export const fetchCurrentlyPlaying = async (token) => {
         duration: item.duration_ms,
         image: item.album.images[0].url,
         uri: response.data.context.uri,
+        track_uri: response.data.item.uri,
         progress_ms: response.data.progress_ms,
       };
+      console.log(response.data);
       return currentlyPlaying;
-    } else return null;
+    } else return {};
   } catch (error) {
     console.log(error);
   }
@@ -176,7 +178,7 @@ export const fetchCurrentlyPlaying = async (token) => {
 export const fetchMusixMatchTrack = async (artist, track) => {
   try {
     const response = await axios.get(
-      `http://localhost:5000/track?artist=${artist}&track=${track}`
+      `https://cors-errors.vercel.app/track?artist=${artist}&track=${track}`
     );
     const trackDetails = {
       track_id: response.data.message.body.track_list[0].track.track_id,
@@ -191,9 +193,14 @@ export const fetchMusixMatchTrack = async (artist, track) => {
 export const fetchMusixMatchTrackLyrics = async (track_id, commontrack_id) => {
   try {
     const response = await axios.get(
-      `http://localhost:5000/lyrics?track_id=${track_id}`
+      `https://cors-errors.vercel.app/lyrics?track_id=${track_id}`
     );
-    return response.data.message.body.lyrics.lyrics_body;
+    let n = response.data.message.body.lyrics.lyrics_id;
+    const data = {
+      lyrics: response.data.message.body.lyrics.lyrics_body,
+      id: n,
+    };
+    return data;
   } catch (error) {
     console.log(error);
   }

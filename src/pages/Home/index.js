@@ -70,7 +70,9 @@ const HomePage = ({ headerBg }) => {
         {userItems && (
           <HomeCategory items={userItems.slice(7)} title="Popular artists" />
         )}
-        <HomeCategory items={randb.slice(7)} title="Discover something new" />
+        {randb && (
+          <HomeCategory items={randb.slice(7)} title="Discover something new" />
+        )}
         <HomeCategory title="Afro Party vibes only" items={afro.slice(11)} />
         <HomeCategory items={userItems} title="Your favourite artists" />
         <HomeCategory items={newAlbums} title="New releases" />

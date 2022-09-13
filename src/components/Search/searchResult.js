@@ -1,57 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSpotify } from "../../context/SpotifyContext";
 import {
   durationToMinsAndSecs,
   mostPopularItems,
   mostPopularItemData,
+  mostPopularItem,
 } from "../../utils/utilFunctions";
+import { IoIosPause } from "react-icons/io";
 import TrackInfo from "../Playlist/TrackInfo";
 import { ImPlay3 } from "react-icons/im";
 import SearchItemCategory from "./searchItemsCategory";
 import { fetchCurrentlyPlaying } from "../../adapters/getData";
-import { playerState } from "../../adapters/setData";
+import {
+  playerState,
+  playerStateTrack,
+  playerStateTracks,
+} from "../../adapters/setData";
+import loading from "../../assets/22.gif";
+import SearchFilter from "./SearchFilter";
 
-const SearchFilter = ({ title, filter, setFilter, setFiltering }) => {
-  const filtering = () => {
-    setFilter(title);
-    if (title !== "all") {
-      setFiltering(true);
-    } else setFiltering(false);
-  };
-  const currentFilterValue =
-    "text-black bg-white  py-2 px-3 rounded-[20px] capitalize cursor-default";
-  const filterValue =
-    "text-white bg-[#191919] hover:bg-[#212121] py-2 px-3 rounded-[20px] capitalize cursor-default";
-  return (
-    <div className=" border-none font-sans font-normal block text-[14px] ">
-      <span
-        className={filter === title ? currentFilterValue : filterValue}
-        onClick={() => filtering()}
-      >
-        {title}
-      </span>
-    </div>
-  );
-};
-
-const SearchResult = ({ showResult }) => {
+const SearchResult = ({ tableHeading }) => {
   const { state, dispatch } = useSpotify();
   const [filter, setFilter] = useState("all");
   const [filtering, setFiltering] = useState(false);
-  const { searchResult, token } = state;
-  const playCollection = (uri) => {
-    playerState("play", token, uri).then(() => {
-      fetchCurrentlyPlaying(token).then((response) => {
-        dispatch({ type: "setPlayingTrack", payload: response });
-      });
+  const { searchResult, token, currentlyPlayingTrack, playingState } = state;
+  const playCollection = (type, albumUri, uri) => {
+    playerStateTracks(type, token, albumUri, uri).then(() => {
+      if (type === "pause") {
+        dispatch({ type: "setPlayingState", payload: false });
+      } else {
+        dispatch({ type: "setPlayingState", payload: true });
+        fetchCurrentlyPlaying(token).then((response) => {
+          dispatch({ type: "setPlayingTrack", payload: response });
+        });
+      }
     });
   };
-  console.log(filter);
+  useEffect(() => {
+    fetchCurrentlyPlaying(token).then((response) => {
+      dispatch({ type: "setPlayingTrack", payload: response });
+    });
+  }, [dispatch, token]);
   return (
     <>
       {Object.keys(searchResult).length > 0 ? (
         <div className="pt-4 h-screen px-8 text-white">
-          <div className="flex gap-3">
+          <div className="flex gap-3 sticky">
             <SearchFilter title="all" setFilter={setFilter} filter={filter} />
             <SearchFilter
               title="artists"
@@ -103,40 +97,66 @@ const SearchResult = ({ showResult }) => {
                         </div>
                       </div>
                       <div className="w-[45px] h-[45px] rounded-[50%] bg-[#1ad760] hidden  absolute bottom-8 right-5 group-hover:flex  items-center justify-center hover:w-[47px] hover:h-[47px]">
-                        <ImPlay3
-                          className="text-black text-[25px] ml-px"
-                          onClick={() =>
-                            playCollection(mostPopularItemData.uri)
-                          }
-                        />
+                        {currentlyPlayingTrack?.id !== mostPopularItemData.id ||
+                        !playingState ? (
+                          <ImPlay3
+                            className="text-black text-[25px] ml-px"
+                            onClick={() =>
+                              playCollection(
+                                "play",
+                                mostPopularItemData.album,
+                                mostPopularItemData.uri
+                              )
+                            }
+                          />
+                        ) : (
+                          <IoIosPause
+                            className="text-black text-[25px] ml-px"
+                            onClick={() =>
+                              playCollection(
+                                "pause",
+                                mostPopularItemData.album,
+                                mostPopularItemData.uri
+                              )
+                            }
+                          />
+                        )}
                       </div>
                     </div>
                   </div>
                 </section>
                 <section className=" md:w-[60%] 2xl:w-[70%] ">
-                  <p className="font-bold text-[25px]">Songs</p>
+                  <p className="font-bold text-[25px] pl-10">Songs</p>
                   <div className="py-2 block relative bg-transparent rounded-lg h-[250px]">
                     {mostPopularItems(searchResult.tracks)
                       .slice(0, 4)
-                      .map(({ id, name, artists, album, duration_ms }) => {
-                        return (
-                          <div
-                            className="flex justify-between px-[0.7rem] items-center hover:bg-[#2b2b2b] hover:rounded-md"
-                            key={id}
-                          >
-                            <TrackInfo
-                              id={id}
-                              name={name}
-                              artist={artists}
-                              image={album?.images[2]}
-                              type="search"
-                            />
-                            <span className="text-[#b3b3b3] py-1 self-center font-normal">
-                              {durationToMinsAndSecs(duration_ms)}
-                            </span>
-                          </div>
-                        );
-                      })}
+                      .map(
+                        (
+                          { id, name, artists, album, duration_ms, uri },
+                          index
+                        ) => {
+                          return (
+                            <div
+                              className="flex justify-between px-[0.7rem] items-center hover:bg-[#2b2b2b] hover:rounded-md"
+                              key={id}
+                            >
+                              <TrackInfo
+                                id={id}
+                                index={index}
+                                track_uri={uri}
+                                name={name}
+                                album_uri={album.uri}
+                                artist={artists}
+                                image={album?.images[2]}
+                                type="search"
+                              />
+                              <span className="text-[#b3b3b3] py-1 self-center font-normal">
+                                {durationToMinsAndSecs(duration_ms)}
+                              </span>
+                            </div>
+                          );
+                        }
+                      )}
                   </div>
                 </section>
               </div>
@@ -144,25 +164,32 @@ const SearchResult = ({ showResult }) => {
           )}
 
           <div className="pb-4">
-            {((filter === "artists" && filtering) || !filtering) && (
-              <SearchItemCategory title="artists" />
+            {((filter === "artists" && filtering) || filter === "all") && (
+              <SearchItemCategory title="artists" filter={filter} />
             )}
-            {((filter === "albums" && filtering) || !filtering) && (
-              <SearchItemCategory title="album" />
+            {((filter === "albums" && filtering) || filter === "all") && (
+              <SearchItemCategory title="album" filter={filter} />
             )}
-            {((filter === "playlists" && filtering) || !filtering) && (
-              <SearchItemCategory title="playlists" />
+            {((filter === "playlists" && filtering) || filter === "all") && (
+              <SearchItemCategory title="playlists" filter={filter} />
             )}
-            {((filter === "podcasts & shows" && filtering) || !filtering) && (
-              <SearchItemCategory title="shows" />
+            {((filter === "podcasts & shows" && filter) ||
+              filter === "all") && (
+              <SearchItemCategory title="shows" filter={filter} />
             )}
-            {((filter === "episodes" && filtering) || !filtering) && (
-              <SearchItemCategory title="episodes" />
+            {filter === "songs" && filtering && (
+              <SearchItemCategory
+                title="songs"
+                tableHeading={tableHeading}
+                filtering={filtering}
+              />
             )}
           </div>
         </div>
       ) : (
-        <div>No Result</div>
+        <div className="text-white flex justify-center pt-16 font-sans font-bold text-[15px]">
+          <img src={loading} alt="" />
+        </div>
       )}
     </>
   );

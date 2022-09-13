@@ -62,19 +62,21 @@ const UserProfile = ({ headerBg }) => {
             </span>
           </div>
           {mostPopularItems(userTopTracks)
-            .slice(0, 4)
-            .map(({ id, name, artists, album, duration_ms }) => {
+            .slice(0, 7)
+            .map(({ id, name, artists, album, duration_ms, uri }, index) => {
               return (
                 <div
-                  className="flex justify-between px-[0.7rem] items-center hover:bg-[#2b2b2b] hover:rounded-md mt-2"
+                  className="grid grid-cols-searchTracksBody px-[0.7rem] items-center hover:bg-[#2b2b2b] hover:rounded-md mt-2"
                   key={id}
                 >
                   <TrackInfo
                     id={id}
+                    index={index}
                     name={name}
                     artist={artists}
                     album={album?.name}
                     image={album?.images[2]}
+                    track_uri={uri}
                     type="profile"
                   />
                   <span className="text-[#b3b3b3] py-1 self-center justify-start flex font-normal">

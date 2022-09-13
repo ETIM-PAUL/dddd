@@ -27,17 +27,30 @@ const PlaylistDetails = ({ tableHeading, headerBg }) => {
     currentlyPlayingTrack,
   } = state;
 
-  const setPlayerState = (type) => {
-    playerState(type, token, selectedPlaylistData.uri).then(() => {
-      if (type === "pause") {
-        dispatch({ type: "setPlayingState", payload: false });
-      } else {
-        dispatch({ type: "setPlayingState", payload: true });
-        fetchCurrentlyPlaying(token).then((response) => {
-          dispatch({ type: "setPlayingTrack", payload: response });
-        });
-      }
-    });
+  const setPlayerState = (type, uri) => {
+    if (playingState && uri !== currentlyPlayingTrack.uri) {
+      playerState(type, token, selectedPlaylistData.uri).then(() => {
+        if (type === "pause") {
+          dispatch({ type: "setPlayingState", payload: false });
+        } else {
+          dispatch({ type: "setPlayingState", payload: true });
+          fetchCurrentlyPlaying(token).then((response) => {
+            dispatch({ type: "setPlayingTrack", payload: response });
+          });
+        }
+      });
+    } else if (uri === currentlyPlayingTrack.uri) {
+      playerState(type, token).then(() => {
+        if (type === "pause") {
+          dispatch({ type: "setPlayingState", payload: false });
+        } else {
+          dispatch({ type: "setPlayingState", payload: true });
+          fetchCurrentlyPlaying(token).then((response) => {
+            dispatch({ type: "setPlayingTrack", payload: response });
+          });
+        }
+      });
+    }
   };
 
   useEffect(() => {
@@ -47,7 +60,7 @@ const PlaylistDetails = ({ tableHeading, headerBg }) => {
       });
       setTimeout(() => {
         setLoading(false);
-      }, 2000);
+      }, 1000);
     }
   }, [dispatch, selectedPlaylist, token]);
   return (
@@ -71,7 +84,12 @@ const PlaylistDetails = ({ tableHeading, headerBg }) => {
                             <div className="w-[48px] h-[48px] rounded-[50%] bg-[#1ad760] hover:bg-[#5cc75c] flex items-center justify-center hover:w-[50px] hover:h-[50px]">
                               <ImPlay3
                                 className="text-black text-[25px] ml-px"
-                                onClick={() => setPlayerState("play")}
+                                onClick={() =>
+                                  setPlayerState(
+                                    "play",
+                                    selectedPlaylistData.uri
+                                  )
+                                }
                               />
                             </div>
                           </div>
@@ -80,7 +98,12 @@ const PlaylistDetails = ({ tableHeading, headerBg }) => {
                             <div className="w-[48px] h-[48px] rounded-[50%] bg-[#1ad760] hover:bg-[#5cc75c] flex items-center justify-center hover:w-[50px] hover:h-[50px]">
                               <IoIosPause
                                 className=" text-[25px] ml-px "
-                                onClick={() => setPlayerState("pause")}
+                                onClick={() =>
+                                  setPlayerState(
+                                    "pause",
+                                    selectedPlaylistData.uri
+                                  )
+                                }
                               />
                             </div>
                           </div>

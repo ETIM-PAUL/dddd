@@ -21,15 +21,22 @@ export const changeVolume = async (token, value) => {
   }
 };
 
-export const playerState = async (type, token, context_uri, track_number) => {
+export const playerStateTracks = async (
+  type,
+  token,
+  context_uri,
+  track_uri
+) => {
   try {
     let res;
     await axios.put(
       `https://api.spotify.com/v1/me/player/${type}`,
       {
         context_uri,
+        offset: {
+          uri: track_uri,
+        },
         position_ms: 0,
-        offset: parseInt(track_number - 1),
       },
       {
         headers: {
@@ -38,7 +45,54 @@ export const playerState = async (type, token, context_uri, track_number) => {
         },
       }
     );
-    fetchCurrentlyPlaying(token);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const playerState = async (type, token, context_uri, track_uri) => {
+  try {
+    let res;
+    await axios.put(
+      `https://api.spotify.com/v1/me/player/${type}`,
+      {
+        context_uri,
+        // offset: {
+        //   uri: track_uri,
+        // },
+        position_ms: 0,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const playerStateTrack = async (type, token, context_uri, track_uri) => {
+  try {
+    let res;
+    await axios.put(
+      `https://api.spotify.com/v1/me/player/${type}`,
+      {
+        context_uri,
+        offset: {
+          uri: track_uri,
+        },
+        position_ms: 0,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     return res;
   } catch (error) {
     console.log(error);
@@ -57,8 +111,6 @@ export const skipTrack = async (type, token) => {
         },
       }
     );
-
-    fetchCurrentlyPlaying(token);
   } catch (error) {
     console.log(error);
   }

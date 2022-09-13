@@ -32,7 +32,7 @@ export const durationToMinsAndSecs = (duration) => {
 
 export const spaceArtistes = (artistes, type) => {
   if (artistes?.length > 0) {
-    if (type === "search" || type === "profile") {
+    if (type === "search" || type === "profile" || type === "searchTracks") {
       return artistes.map((artiste) => artiste.name).join(", ");
     }
     return artistes.join(", ");
@@ -40,11 +40,13 @@ export const spaceArtistes = (artistes, type) => {
 };
 
 export const mostPopularItemData = {
+  id: "",
   image: "",
   name: "",
   artists: "",
   type: "",
   uri: "",
+  album: "",
 };
 
 export const mostPopularItem = (searchResult) => {
@@ -53,9 +55,11 @@ export const mostPopularItem = (searchResult) => {
   );
   mostPopularItemData.image = mostPopularItem[0].album.images[1].url;
   mostPopularItemData.name = mostPopularItem[0].name;
+  mostPopularItemData.id = mostPopularItem[0].id;
   mostPopularItemData.artists = mostPopularItem[0].artists;
   mostPopularItemData.type = mostPopularItem[0].type;
   mostPopularItemData.uri = mostPopularItem[0].uri;
+  mostPopularItemData.album = mostPopularItem[0].album.uri;
 };
 
 export const mostPopularItems = (type) => {
@@ -66,11 +70,3 @@ export const mostPopularItems = (type) => {
   const itemsToDisplay = type.slice(0, 20);
   return itemsToDisplay;
 };
-// export const mostPopularArtists = (searchResult) => {
-//   searchResult.artists.sort((a, b) =>
-//     a.popularity < b.popularity ? 1 : a.popularity > b.popularity ? -1 : 0
-//   );
-
-//   const artistsToDisplay = searchResult.artists.slice(0, 4);
-//   return artistsToDisplay;
-// };

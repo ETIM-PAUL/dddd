@@ -25,10 +25,10 @@ const SpotifyPlayerController = () => {
   const skipPlayingTrack = (type) => {
     skipTrack(type, token).then(() => {
       fetchCurrentlyPlaying(token).then((response) => {
+        dispatch({ type: "setPlayingState", payload: true });
         dispatch({ type: "setPlayingTrack", payload: response });
       });
     });
-    dispatch({ type: "setPlayingState", payload: true });
     setCurrentTime(0.0);
   };
   return (

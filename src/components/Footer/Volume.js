@@ -24,13 +24,13 @@ const Volume = () => {
     setMute(!mute);
     if (type === "mute") {
       changeVolume(token, 0);
-      fetchPlayerState().then((res) => {
+      fetchPlayerState(token).then((res) => {
         setVolumeVal(res.volume);
       });
       dispatch({ type: "setPlayerVolume", payload: 0 });
     } else {
       changeVolume(token, volumeVal);
-      fetchPlayerState().then((res) => {
+      fetchPlayerState(token).then((res) => {
         setVolumeVal(res.volume);
       });
       dispatch({ type: "setPlayerVolume", payload: volumeVal });

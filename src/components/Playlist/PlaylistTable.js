@@ -37,7 +37,17 @@ const PlaylistTable = ({ tableHeading }) => {
       {/* Tracks Info */}
       {selectedPlaylistData?.tracks.map(
         (
-          { id, album, image, addedOn, name, isExplicit, duration, artist },
+          {
+            id,
+            album,
+            image,
+            addedOn,
+            name,
+            isExplicit,
+            duration,
+            artist,
+            track_uri,
+          },
           index
         ) => {
           return (
@@ -52,6 +62,7 @@ const PlaylistTable = ({ tableHeading }) => {
                 name={name}
                 artist={artist}
                 isExplicit={isExplicit}
+                track_uri={track_uri}
                 type="playlist"
               />
               <span className="text-[#b3b3b3] py-1 text-[13px] capitalize self-center font-normal">

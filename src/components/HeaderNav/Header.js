@@ -25,6 +25,9 @@ const Header = ({ headerBg, type }) => {
   };
   const handleSearch = (value) => {
     setSearchInput(value);
+    if (searchInput === "") {
+      dispatch({ type: "setSearchResult", payload: {} });
+    }
     dispatch({ type: "setSearchValue", payload: value });
   };
   // useEffect(() => {

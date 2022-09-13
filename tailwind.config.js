@@ -7,10 +7,14 @@ module.exports = {
         // Simple 16 column grid
         tableGridBody: "1.4fr 0.9fr 0.92fr 0.2fr",
         tableGridHead: "1.4fr 0.9fr 0.92fr 0.2fr",
+        searchTracksHead: "1.4fr 0.9fr 0.15fr",
+        searchTracksBody: "1.4fr 0.9fr 0.15fr",
+
         itemsColumn: "minmax(auto,1fr)",
       },
       gridTemplateRows: {
         // Simple 16 column grid
+        full: "100%",
         tableGridBody: "1.4fr 0.9fr 0.92fr 0.2fr",
         tableGridHead: "1.4fr 0.9fr 0.92fr 0.2fr",
       },

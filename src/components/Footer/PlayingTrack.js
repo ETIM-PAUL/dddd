@@ -32,8 +32,8 @@ const PlayingTrack = () => {
         </>
       ) : (
         <span className="text-[#b3b3b3] w-[300px] text-[10px] text-white font-bold">
-          Sorry, This app isn't synched with your current playing device. Please
-          refresh this page. If problem persist. You probably have a slow
+          Sorry, This app isn't fully synched with your current playing device.
+          Please refresh this page. If problem persist. You probably have a slow
           network.
         </span>
       )}

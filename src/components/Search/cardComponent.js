@@ -21,15 +21,17 @@ const CardComponent = ({ ...props }) => {
           dispatch({ type: "setPlayingState", payload: response.isPlaying });
         })
         .then(() => {
-          fetchCurrentlyPlaying(token).then((response) => {
-            dispatch({ type: "setPlayingTrack", payload: response });
-          });
+          setTimeout(() => {
+            fetchCurrentlyPlaying(token).then((response) => {
+              dispatch({ type: "setPlayingTrack", payload: response });
+            });
+          }, 300);
         });
     });
   };
 
   return (
-    <div className="group  isolate flex-1  hover:bg-[#222222] hover:cursor-pointer rounded-[10px] bg-[#181818] flex">
+    <div className="group isolate hover:bg-[#222222] hover:cursor-pointer rounded-[10px] bg-[#181818] flex">
       <div className="inline-grid  px-4 w-full ">
         <div className="mt-4 mb-3 relative">
           <div

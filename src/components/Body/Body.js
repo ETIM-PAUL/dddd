@@ -19,7 +19,7 @@ const Body = () => {
 
   return (
     <div
-      className=" h-[90vh] w-[100%] block overflow-y-scroll bg-blend  "
+      className=" h-[90vh] w-[100%] block overflow-y-scroll bg-blend"
       ref={contentRef}
       onScroll={contentScroll}
     >
@@ -33,7 +33,9 @@ const Body = () => {
         />
         <Route
           path="/search"
-          element={<SearchBody headerBg={secondheaderBg} />}
+          element={
+            <SearchBody headerBg={secondheaderBg} tableHeading={tableHeading} />
+          }
         />
         <Route path="/profile" element={<UserProfile headerBg={headerBg} />} />
         <Route path="/lyrics" element={<SongLyrics />} />

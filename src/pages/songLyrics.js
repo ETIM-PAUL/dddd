@@ -15,27 +15,32 @@ const SongLyrics = () => {
     if (lyricsBody.current === undefined) {
       return;
     }
-    if (currentlyPlayingTrack !== null) {
-      for (let index = 0; index < colors.length; index++) {
-        lyricsBody.current.style.backgroundColor =
-          colors[Math.floor(Math.random() * colors.length)];
-      }
+    if (currentlyPlayingTrack !== undefined || currentlyPlayingTrack !== null) {
       fetchMusixMatchTrack(
-        currentlyPlayingTrack.artistes[0],
-        currentlyPlayingTrack.name
+        currentlyPlayingTrack?.artistes[0],
+        currentlyPlayingTrack?.name
       ).then((response) => {
+        if (response === "") {
+          setLyrics(
+            "Sorry, This app isn't fully synched with your current playing device. Please refresh this page. If problem persist. You probably have a slow network"
+          );
+        }
         fetchMusixMatchTrackLyrics(
           response.track_id,
           response.commontrack_id
         ).then((response) => {
           if (response) {
-            setLyrics(response);
+            for (let index = 0; index < colors.length; index++) {
+              lyricsBody.current.style.backgroundColor =
+                colors[Math.floor(response.id % 10)];
+            }
+            setLyrics(response.lyrics);
           } else setLyrics("Sorry, You will have to guess this one's lyrics");
         });
       });
     } else
       setLyrics(
-        "Sorry, This app isn't synched with your current playing device. Please refresh this page. If problem persist. You probably have a slow network"
+        "Sorry, This app isn't fully synched with your current playing device. Please refresh this page. If problem persist. You probably have a slow network"
       );
   }, [
     currentlyPlayingTrack,
@@ -51,7 +56,7 @@ const SongLyrics = () => {
           <div className="pt-6 px-16 text-[30px] text-white font-bold whitespace-pre-wrap">
             {lyrics}
           </div>
-          <div className="pt-8 pb-7 text-[12px] text-white font-normal">
+          <div className="pt-8 px-16 pb-7 text-[12px] text-white font-normal">
             Lyrics provided by MusixMatch (The lyrics is not complete, as
             MusixMatch only provides 30% of the lyrics for unpaid plan){" "}
           </div>

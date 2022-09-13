@@ -7,7 +7,7 @@ import SearchResult from "../../components/Search/searchResult";
 import CategoryItems from "../../components/Search/category";
 import { mostPopularItem } from "../../utils/utilFunctions";
 
-const SearchBody = ({ headerBg }) => {
+const SearchBody = ({ headerBg, tableHeading }) => {
   const { state, dispatch } = useSpotify();
   const [loading, setLoading] = useState(true);
   const { token, categories, searchValue, selectedCategory } = state;
@@ -36,10 +36,10 @@ const SearchBody = ({ headerBg }) => {
       {loading ? null : (
         <>
           {searchValue !== "" ? (
-            <SearchResult showResult={showResult} />
+            <SearchResult showResult={showResult} tableHeading={tableHeading} />
           ) : (
             <div className="pt-8 h-screen px-8">
-              {selectedCategory === null ? (
+              {categories && selectedCategory === null ? (
                 <>
                   <div className="text-[#fff] block font-sans items-center">
                     <p className="font-semibold text-[25px]">Your top genres</p>
